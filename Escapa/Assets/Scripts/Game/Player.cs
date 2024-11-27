@@ -39,6 +39,11 @@ namespace Escapa.Game
                 var position = camera.ScreenToWorldPoint(touch.position);
                 OnTouch(position);
             }
+            else if (Input.GetMouseButton(0))
+            {
+                var position = camera.ScreenToWorldPoint(Input.mousePosition);
+                OnTouch(position);
+            }
 
             if (isTouched)
                 transform.position = targetPosition;
