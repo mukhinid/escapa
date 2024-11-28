@@ -90,7 +90,7 @@ namespace Escapa.Core
                     ""name"": ""Submit"",
                     ""type"": ""Button"",
                     ""id"": ""7607c7b6-cd76-4816-beef-bd0341cfe950"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -99,7 +99,7 @@ namespace Escapa.Core
                     ""name"": ""Cancel"",
                     ""type"": ""Button"",
                     ""id"": ""15cef263-9014-4fd5-94d9-4e4a6234a6ef"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -588,6 +588,34 @@ namespace Escapa.Core
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Core"",
+            ""id"": ""4a01f9d5-c139-4732-a33a-23d72ca5a42a"",
+            ""actions"": [
+                {
+                    ""name"": ""GoBack"",
+                    ""type"": ""Button"",
+                    ""id"": ""c637b933-70bf-45e4-97bc-a552845d7a02"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""de3050ac-9193-4367-9655-bf807cedca8e"",
+                    ""path"": ""*/{Cancel}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse;Gamepad;Touch;XR;Joystick"",
+                    ""action"": ""GoBack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -669,12 +697,16 @@ namespace Escapa.Core
             m_UI_ScrollWheel = m_UI.FindAction("ScrollWheel", throwIfNotFound: true);
             m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
             m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+            // Core
+            m_Core = asset.FindActionMap("Core", throwIfNotFound: true);
+            m_Core_GoBack = m_Core.FindAction("GoBack", throwIfNotFound: true);
         }
 
         ~@InputSystem_Actions()
         {
             UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Player.Disable() has not been called.");
             UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputSystem_Actions.UI.Disable() has not been called.");
+            UnityEngine.Debug.Assert(!m_Core.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Core.Disable() has not been called.");
         }
 
         public void Dispose()
@@ -904,6 +936,52 @@ namespace Escapa.Core
             }
         }
         public UIActions @UI => new UIActions(this);
+
+        // Core
+        private readonly InputActionMap m_Core;
+        private List<ICoreActions> m_CoreActionsCallbackInterfaces = new List<ICoreActions>();
+        private readonly InputAction m_Core_GoBack;
+        public struct CoreActions
+        {
+            private @InputSystem_Actions m_Wrapper;
+            public CoreActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @GoBack => m_Wrapper.m_Core_GoBack;
+            public InputActionMap Get() { return m_Wrapper.m_Core; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(CoreActions set) { return set.Get(); }
+            public void AddCallbacks(ICoreActions instance)
+            {
+                if (instance == null || m_Wrapper.m_CoreActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_CoreActionsCallbackInterfaces.Add(instance);
+                @GoBack.started += instance.OnGoBack;
+                @GoBack.performed += instance.OnGoBack;
+                @GoBack.canceled += instance.OnGoBack;
+            }
+
+            private void UnregisterCallbacks(ICoreActions instance)
+            {
+                @GoBack.started -= instance.OnGoBack;
+                @GoBack.performed -= instance.OnGoBack;
+                @GoBack.canceled -= instance.OnGoBack;
+            }
+
+            public void RemoveCallbacks(ICoreActions instance)
+            {
+                if (m_Wrapper.m_CoreActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(ICoreActions instance)
+            {
+                foreach (var item in m_Wrapper.m_CoreActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_CoreActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public CoreActions @Core => new CoreActions(this);
         private int m_KeyboardMouseSchemeIndex = -1;
         public InputControlScheme KeyboardMouseScheme
         {
@@ -966,6 +1044,10 @@ namespace Escapa.Core
             void OnScrollWheel(InputAction.CallbackContext context);
             void OnTrackedDevicePosition(InputAction.CallbackContext context);
             void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+        }
+        public interface ICoreActions
+        {
+            void OnGoBack(InputAction.CallbackContext context);
         }
     }
 }
