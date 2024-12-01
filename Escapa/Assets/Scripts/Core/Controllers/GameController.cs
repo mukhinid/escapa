@@ -1,15 +1,19 @@
-﻿using Escapa.Core.Events;
+using Escapa.Core.Events;
 using Escapa.Core.Interfaces;
 using Escapa.Core.Managers;
 using Escapa.Utility;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using static Escapa.Core.InputSystem_Actions;
 
 namespace Escapa.Core.Controllers
 {
-    public sealed class GameController : MonoBehaviour, IGameController
+    public sealed class GameController : MonoBehaviour, IGameController, ICoreActions
     {
         public event GameEvent GameStarted;
+
+        private InputSystem_Actions _actions;
 
         private IPlayer player;
 
@@ -24,13 +28,17 @@ namespace Escapa.Core.Controllers
             player.Moved += OnPlayerMoved;
             player.Pressed += OnPlayerPressed;
             player.Stopped += OnPlayerStopped;
+
+            if (_actions == null)
+            {
+                _actions = new InputSystem_Actions();
+                _actions.Core.SetCallbacks(this);
+            }
+            _actions.Core.Enable();
         }
 
         private void FixedUpdate()
         {
-            if (Input.GetKey(KeyCode.Escape))
-                ScoreManager.StopCount();
-
             if (ScoreManager.CurrentTime > ScoreManager.BlackHawkTime && DifficultyManager.Current.difficulty == Difficulties.Insane)
                 SocialManager.CompleteAchievement(GooglePlayIds.achievement_black_hawk);
 
@@ -56,6 +64,8 @@ namespace Escapa.Core.Controllers
             player.Moved -= OnPlayerMoved;
             player.Pressed -= OnPlayerPressed;
             player.Stopped -= OnPlayerStopped;
+
+            _actions.Core.Disable();
         }
 
         private void OnPlayerDie()
@@ -90,6 +100,14 @@ namespace Escapa.Core.Controllers
             {
                 idleTime = ScoreManager.CurrentTime;
                 movingTime = null;
+            }
+        }
+
+        public void OnGoBack(InputAction.CallbackContext context)
+        {
+            if (context.action.WasReleasedThisFrame())
+            {
+                ScoreManager.StopCount();
             }
         }
     }
