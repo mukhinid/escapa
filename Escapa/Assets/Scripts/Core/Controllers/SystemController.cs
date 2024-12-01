@@ -1,4 +1,4 @@
-﻿using Escapa.Core.Interfaces;
+using Escapa.Core.Interfaces;
 using Escapa.Core.Managers;
 using Escapa.Utility;
 using UnityEngine;
@@ -68,10 +68,13 @@ namespace Escapa.Core.Controllers
 
         public void OnGoBack(InputAction.CallbackContext context)
         {
-            if (current == GameScenes.Menu)
-                Application.Quit();
-            else
-                SceneManager.LoadScene((int)GameScenes.Menu, LoadSceneMode.Single);
+            if (context.action.WasReleasedThisFrame())
+            {
+                if (current == GameScenes.Menu)
+                    Application.Quit();
+                else
+                    SceneManager.LoadScene((int)GameScenes.Menu, LoadSceneMode.Single);
+            }
         }
     }
 }
