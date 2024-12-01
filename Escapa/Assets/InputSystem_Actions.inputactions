@@ -8,44 +8,46 @@
                 {
                     "name": "Move",
                     "type": "Value",
-                    "id": "75d54028-0088-4dd8-9dd8-ac02f2e4fdd4",
+                    "id": "60596eee-6298-4aae-b294-e024d86b872d",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "ToggleMove",
-                    "type": "Button",
-                    "id": "81797bbf-017f-44d9-81c0-98fa53165610",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "459c84cc-fe9b-4502-ae71-d3ff2b46d7af",
-                    "path": "<Pointer>/delta",
+                    "name": "One Modifier",
+                    "id": "3d3b5559-e997-42a2-b742-5d2acb37280c",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "af9d2fc3-746e-4f91-9311-90fdbf1bcbc7",
+                    "path": "<Pointer>/press",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse;Touch",
                     "action": "Move",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "3c323846-00d1-448a-a5c5-7b7bed57089d",
-                    "path": "<Pointer>/press",
+                    "name": "binding",
+                    "id": "b204640b-aff3-4b0f-8ea3-4b2cfb1feb75",
+                    "path": "<Pointer>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse;Touch",
-                    "action": "ToggleMove",
+                    "action": "Move",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 }
             ]
         },

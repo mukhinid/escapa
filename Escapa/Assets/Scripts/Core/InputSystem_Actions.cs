@@ -32,44 +32,46 @@ namespace Escapa.Core
                 {
                     ""name"": ""Move"",
                     ""type"": ""Value"",
-                    ""id"": ""75d54028-0088-4dd8-9dd8-ac02f2e4fdd4"",
+                    ""id"": ""60596eee-6298-4aae-b294-e024d86b872d"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""ToggleMove"",
-                    ""type"": ""Button"",
-                    ""id"": ""81797bbf-017f-44d9-81c0-98fa53165610"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
-                    ""name"": """",
-                    ""id"": ""459c84cc-fe9b-4502-ae71-d3ff2b46d7af"",
-                    ""path"": ""<Pointer>/delta"",
+                    ""name"": ""One Modifier"",
+                    ""id"": ""3d3b5559-e997-42a2-b742-5d2acb37280c"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""af9d2fc3-746e-4f91-9311-90fdbf1bcbc7"",
+                    ""path"": ""<Pointer>/press"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse;Touch"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""3c323846-00d1-448a-a5c5-7b7bed57089d"",
-                    ""path"": ""<Pointer>/press"",
+                    ""name"": ""binding"",
+                    ""id"": ""b204640b-aff3-4b0f-8ea3-4b2cfb1feb75"",
+                    ""path"": ""<Pointer>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse;Touch"",
-                    ""action"": ""ToggleMove"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -684,7 +686,6 @@ namespace Escapa.Core
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-            m_Player_ToggleMove = m_Player.FindAction("ToggleMove", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -769,13 +770,11 @@ namespace Escapa.Core
         private readonly InputActionMap m_Player;
         private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
         private readonly InputAction m_Player_Move;
-        private readonly InputAction m_Player_ToggleMove;
         public struct PlayerActions
         {
             private @InputSystem_Actions m_Wrapper;
             public PlayerActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Player_Move;
-            public InputAction @ToggleMove => m_Wrapper.m_Player_ToggleMove;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -788,9 +787,6 @@ namespace Escapa.Core
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @ToggleMove.started += instance.OnToggleMove;
-                @ToggleMove.performed += instance.OnToggleMove;
-                @ToggleMove.canceled += instance.OnToggleMove;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -798,9 +794,6 @@ namespace Escapa.Core
                 @Move.started -= instance.OnMove;
                 @Move.performed -= instance.OnMove;
                 @Move.canceled -= instance.OnMove;
-                @ToggleMove.started -= instance.OnToggleMove;
-                @ToggleMove.performed -= instance.OnToggleMove;
-                @ToggleMove.canceled -= instance.OnToggleMove;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -1030,7 +1023,6 @@ namespace Escapa.Core
         public interface IPlayerActions
         {
             void OnMove(InputAction.CallbackContext context);
-            void OnToggleMove(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

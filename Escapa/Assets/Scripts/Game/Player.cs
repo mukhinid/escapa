@@ -1,18 +1,23 @@
-﻿using Escapa.Core.Events;
+using Escapa.Core;
+using Escapa.Core.Events;
 using Escapa.Core.Interfaces;
 using Escapa.Core.Managers;
 using Escapa.Utility;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using static Escapa.Core.InputSystem_Actions;
 
 namespace Escapa.Game
 {
     [RequireComponent(typeof(BoxCollider2D), typeof(SpriteRenderer))]
-    public sealed class Player : MonoBehaviour, IPlayer
+    public sealed class Player : MonoBehaviour, IPlayer, IPlayerActions
     {
         public event GameEvent Died;
         public event GameEvent Moved;
         public event GameEvent Pressed;
         public event GameEvent Stopped;
+
+        private InputSystem_Actions _actions;
 
         private new IMainCamera camera;
         private SpriteRenderer spriteRenderer;
@@ -29,22 +34,20 @@ namespace Escapa.Game
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
+        private void OnEnable()
+        {
+            if (_actions == null)
+            {
+                _actions = new InputSystem_Actions();
+                _actions.Player.SetCallbacks(this);
+            }
+            _actions.Player.Enable();
+        }
+
         private void Start() => spriteRenderer.color = StyleManager.Colors.Player;
 
         private void Update()
         {
-            if (Input.touchCount > 0)
-            {
-                var touch = Input.GetTouch(0);
-                var position = camera.ScreenToWorldPoint(touch.position);
-                OnTouch(position);
-            }
-            else if (Input.GetMouseButton(0))
-            {
-                var position = camera.ScreenToWorldPoint(Input.mousePosition);
-                OnTouch(position);
-            }
-
             if (isTouched)
                 transform.position = targetPosition;
 
@@ -57,8 +60,14 @@ namespace Escapa.Game
 
         private void OnCollisionEnter2D() => Died?.Invoke();
 
-        private void OnTouch(Vector2 position)
+        private void OnDisable()
         {
+            _actions.Player.Disable();
+        }
+
+        public void OnMove(InputAction.CallbackContext context)
+        {
+            var position = camera.ScreenToWorldPoint(context.ReadValue<Vector2>());
             isTouched = IsTouched(position, targetPosition);
 
             if (isTouched)
