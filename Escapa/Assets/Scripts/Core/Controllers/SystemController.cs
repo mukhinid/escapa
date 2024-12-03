@@ -36,7 +36,7 @@ namespace Escapa.Core.Controllers
             _actions.Core.Enable();
         }
 
-        private void Start() => SocialManager.Auth(OnAuthenticated);
+        private void Start() => SceneManager.LoadScene((int)GameScenes.Menu, LoadSceneMode.Single);
 
         // If user wants to quit using Task Manager.
         private void OnApplicationPause(bool pause)
@@ -63,8 +63,6 @@ namespace Escapa.Core.Controllers
         }
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode) => current = (GameScenes)scene.buildIndex;
-
-        private void OnAuthenticated() => SceneManager.LoadScene((int)GameScenes.Menu, LoadSceneMode.Single);
 
         public void OnGoBack(InputAction.CallbackContext context)
         {
