@@ -19,7 +19,10 @@ namespace Escapa.UI
         private void Start()
         {
             if (isSocialButton)
-                gameObject.SetActive(Social.localUser.authenticated);
+            {
+                gameObject.SetActive(SocialManager.IsAuthenticated);
+            }
+
             image.color = StyleManager.Colors.Text;
         }
 
