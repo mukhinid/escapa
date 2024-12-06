@@ -1,4 +1,4 @@
-using Escapa.Core.Managers;
+﻿using Escapa.Core.Managers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +7,9 @@ namespace Escapa.UI
     [RequireComponent(typeof(Image))]
     public sealed class ImageButton : MonoBehaviour
     {
+        [SerializeField]
+        private bool isSocialButton;
+
         private Image image;
 
         private void Awake() => image = GetComponent<Image>();
@@ -15,6 +18,8 @@ namespace Escapa.UI
 
         private void Start()
         {
+            if (isSocialButton)
+                gameObject.SetActive(Social.localUser.authenticated);
             image.color = StyleManager.Colors.Text;
         }
 

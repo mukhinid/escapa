@@ -1,4 +1,4 @@
-namespace Escapa.Utility
+﻿namespace Escapa.Utility
 {
     public enum GameScenes
     {

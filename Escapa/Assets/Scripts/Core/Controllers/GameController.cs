@@ -37,10 +37,23 @@ namespace Escapa.Core.Controllers
             _actions.Core.Enable();
         }
 
+        private void FixedUpdate()
+        {
+            if (ScoreManager.CurrentTime > ScoreManager.BlackHawkTime && DifficultyManager.Current.difficulty == Difficulties.Insane)
+                SocialManager.CompleteAchievement(GooglePlayIds.achievement_black_hawk);
+
+            if (idleTime.HasValue && ScoreManager.CurrentTime - idleTime.Value > ScoreManager.ZenTime)
+                SocialManager.CompleteAchievement(GooglePlayIds.achievement_zen);
+            else if (movingTime.HasValue && ScoreManager.CurrentTime - movingTime > ScoreManager.JaggerTime)
+                SocialManager.CompleteAchievement(GooglePlayIds.achievement_moves_like_jagger);
+        }
+
         private void OnApplicationPause(bool pauseStatus)
         {
             if (pauseStatus)
             {
+                SocialManager.CompleteAchievement(GooglePlayIds.achievement_panic_button);
+
                 OnPlayerDie();
             }
         }
@@ -59,6 +72,7 @@ namespace Escapa.Core.Controllers
         {
             player.Died -= OnPlayerDie;
             ScoreManager.StopCount();
+            SocialManager.SendScore();
 
             SceneManager.LoadScene((int)GameScenes.End);
         }
