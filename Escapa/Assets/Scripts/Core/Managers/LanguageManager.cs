@@ -1,4 +1,7 @@
-﻿using Escapa.Utility;
+using Escapa.Utility;
+#if UNITY_WEBGL && !UNITY_EDITOR
+using Logzep.YandexSDK;
+#endif
 using UnityEngine;
 
 namespace Escapa.Core.Managers
@@ -10,18 +13,31 @@ namespace Escapa.Core.Managers
 
         private static string[] Load()
         {
-            var lang = "en";
-
-            switch(Application.systemLanguage)
-            {
-                case SystemLanguage.French:  lang = "fr"; break;
-                case SystemLanguage.German:  lang = "de"; break;
-                case SystemLanguage.Russian: lang = "ru"; break;
-                case SystemLanguage.Spanish: lang = "es"; break;
-            }
+            var lang = GetLang();
 
             var json = Resources.Load<TextAsset>($"{ResourceKeys.Languages}/{lang}").text;
             return JsonUtility.FromJson<Language>(json).Strings;
+        }
+
+        private static string GetLang()
+        {
+#if UNITY_WEBGL && !UNITY_EDITOR
+            var lang = YandexSDK.Env.Lang.ToLower();
+            if (lang != "fr" &&  lang != "de" && lang != "ru" && lang != "es")
+            {
+                return "en";
+            }
+            return lang;
+#else
+            return Application.systemLanguage switch
+            {
+                SystemLanguage.French => "fr",
+                SystemLanguage.German => "de",
+                SystemLanguage.Russian => "ru",
+                SystemLanguage.Spanish => "es",
+                _ => "en",
+            };
+#endif
         }
     }
 }
