@@ -44,7 +44,6 @@ namespace Escapa.Core.Controllers
             if (pause)
             {
                 DifficultyManager.Save();
-                ScoreManager.Save();
             }
         }
 
@@ -52,7 +51,6 @@ namespace Escapa.Core.Controllers
         private void OnApplicationQuit()
         {
             DifficultyManager.Save();
-            ScoreManager.Save();
         }
 
         private void OnDisable()
