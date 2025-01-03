@@ -1,7 +1,6 @@
 using Escapa.Core.Managers;
 using Escapa.Utility;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static Escapa.Core.InputSystem_Actions;
@@ -10,21 +9,12 @@ namespace Escapa.Core.Controllers
 {
     public sealed class SystemController : MonoBehaviour, ICoreActions
     {
-        [SerializeField]
-        private EventSystem _eventSystem;
-        [SerializeField]
-        private SoundController _backgroundMusic;
-
         private InputSystem_Actions _actions;
 
         private GameScenes current;
 
         private void Awake()
         {
-            DontDestroyOnLoad(gameObject);
-            DontDestroyOnLoad(_eventSystem.gameObject);
-            DontDestroyOnLoad(_backgroundMusic.gameObject);
-
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 60;
         }

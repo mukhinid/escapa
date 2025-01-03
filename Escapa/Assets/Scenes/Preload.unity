@@ -213,6 +213,7 @@ GameObject:
   m_Component:
   - component: {fileID: 695741070}
   - component: {fileID: 695741069}
+  - component: {fileID: 695741071}
   m_Layer: 0
   m_Name: SystemController
   m_TagString: Untagged
@@ -249,6 +250,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &695741071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 695741068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 391cec276a69ba133876387489283bec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!850595691 &1345038586
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -322,6 +335,7 @@ GameObject:
   - component: {fileID: 1404443313}
   - component: {fileID: 1404443312}
   - component: {fileID: 1404443315}
+  - component: {fileID: 1404443316}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -415,6 +429,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63029c9be8f4b3e48826b283469651b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1404443316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404443311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 391cec276a69ba133876387489283bec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1617989743
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,6 +452,7 @@ GameObject:
   - component: {fileID: 1617989746}
   - component: {fileID: 1617989745}
   - component: {fileID: 1617989747}
+  - component: {fileID: 1617989748}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -505,6 +532,18 @@ MonoBehaviour:
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
   m_ScrollDeltaPerTick: 6
+--- !u!114 &1617989748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617989743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 391cec276a69ba133876387489283bec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1744046783
 GameObject:
   m_ObjectHideFlags: 0
@@ -653,6 +692,7 @@ GameObject:
   - component: {fileID: 2054303663}
   - component: {fileID: 2054303662}
   - component: {fileID: 2054303661}
+  - component: {fileID: 2054303664}
   m_Layer: 0
   m_Name: BackgroundMusic
   m_TagString: BackgroundMusic
@@ -784,6 +824,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2054303664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054303660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 391cec276a69ba133876387489283bec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

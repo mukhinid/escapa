@@ -8,6 +8,8 @@ namespace Escapa.Core.Controllers
 {
     public sealed class MenuGuiController : GuiControllerBase
     {
+        private const string BgMusicTag = "BackgroundMusic";
+
         [SerializeField]
         private Sprite soundOn;
         [SerializeField]
@@ -38,7 +40,7 @@ namespace Escapa.Core.Controllers
         private void Awake()
         {
             difficultyButton = GameObject.FindWithTag(Tags.DifficultyButton).GetComponent<TextMeshProUGUI>();
-            _soundController = GameObject.FindWithTag("BackgroundMusic").GetComponent<SoundController>();
+            _soundController = GameObject.FindWithTag(BgMusicTag).GetComponent<SoundController>();
             soundButton = GameObject.FindWithTag(Tags.SoundButton).GetComponent<Image>();
         }
 
