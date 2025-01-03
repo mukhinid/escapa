@@ -38,7 +38,7 @@ namespace Escapa.Core.Controllers
         private void Awake()
         {
             difficultyButton = GameObject.FindWithTag(Tags.DifficultyButton).GetComponent<TextMeshProUGUI>();
-            _soundController = GameObject.FindWithTag(Tags.SystemController).GetComponent<SoundController>();
+            _soundController = GameObject.FindWithTag("BackgroundMusic").GetComponent<SoundController>();
             soundButton = GameObject.FindWithTag(Tags.SoundButton).GetComponent<Image>();
         }
 
