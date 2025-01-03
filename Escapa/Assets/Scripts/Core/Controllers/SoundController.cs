@@ -4,24 +4,29 @@ using UnityEngine;
 namespace Escapa.Core.Controllers
 {
     [RequireComponent(typeof(AudioSource))]
-    public sealed class SoundController : MonoBehaviour, ISoundController
+    public sealed class SoundController : MonoBehaviour
     {
         private const string PlayerPrefKey = "IsSoundMuted";
 
-        private AudioSource audioSource;
+        private AudioSource _audioSource;
 
-        public bool IsMuted => audioSource.mute;
+        public bool IsMuted => _audioSource.mute;
 
         public void ToggleSound()
         {
-            audioSource.mute = !audioSource.mute;
-            PlayerPrefs.SetInt(PlayerPrefKey, audioSource.mute ? 1 : 0);
+            _audioSource.mute = !_audioSource.mute;
+            PlayerPrefs.SetInt(PlayerPrefKey, _audioSource.mute ? 1 : 0);
         }
 
         private void Awake()
         {
-            audioSource = GetComponent<AudioSource>();
-            audioSource.mute = PlayerPrefs.GetInt(PlayerPrefKey, 0) == 1;
+            _audioSource = GetComponent<AudioSource>();
+            _audioSource.mute = PlayerPrefs.GetInt(PlayerPrefKey, 0) == 1;
+        }
+
+        private void OnApplicationFocus(bool focus)
+        {
+            _audioSource.mute = !focus;
         }
     }
 }

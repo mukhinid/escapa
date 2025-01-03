@@ -1,4 +1,3 @@
-using Escapa.Core.Interfaces;
 using Escapa.Core.Managers;
 using Escapa.Utility;
 using UnityEngine;
@@ -8,7 +7,7 @@ using static Escapa.Core.InputSystem_Actions;
 
 namespace Escapa.Core.Controllers
 {
-    [RequireComponent(typeof(ISoundController))]
+    [RequireComponent(typeof(SoundController))]
     public sealed class SystemController : MonoBehaviour, ICoreActions
     {
         private InputSystem_Actions _actions;
