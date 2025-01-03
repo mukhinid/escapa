@@ -10,28 +10,18 @@ namespace Escapa.Core.Controllers
 
         private AudioSource audioSource;
 
-        public bool IsMuted { get; private set; }
+        public bool IsMuted => audioSource.mute;
 
         public void ToggleSound()
         {
-            IsMuted = !IsMuted;
-            audioSource.mute = IsMuted;
+            audioSource.mute = !audioSource.mute;
+            PlayerPrefs.SetInt(PlayerPrefKey, audioSource.mute ? 1 : 0);
         }
 
         private void Awake()
         {
-            IsMuted = PlayerPrefs.GetInt(PlayerPrefKey, 0) == 1;
-
             audioSource = GetComponent<AudioSource>();
-            audioSource.mute = IsMuted;
+            audioSource.mute = PlayerPrefs.GetInt(PlayerPrefKey, 0) == 1;
         }
-
-        private void OnApplicationPause(bool pause)
-        {
-            if (pause)
-                PlayerPrefs.SetInt(PlayerPrefKey, IsMuted ? 1 : 0);
-        }
-
-        private void OnApplicationQuit() => PlayerPrefs.SetInt(PlayerPrefKey, IsMuted ? 1 : 0);
     }
 }
