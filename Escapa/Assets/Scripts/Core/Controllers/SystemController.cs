@@ -38,21 +38,6 @@ namespace Escapa.Core.Controllers
 
         private void Start() => SocialManager.Auth(OnAuthenticated);
 
-        // If user wants to quit using Task Manager.
-        private void OnApplicationPause(bool pause)
-        {
-            if (pause)
-            {
-                DifficultyManager.Save();
-            }
-        }
-
-        // If user wants to quit the usual way.
-        private void OnApplicationQuit()
-        {
-            DifficultyManager.Save();
-        }
-
         private void OnDisable()
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
