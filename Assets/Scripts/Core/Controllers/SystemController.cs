@@ -17,6 +17,8 @@ namespace Escapa.Core.Controllers
         {
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 60;
+
+            DontDestroyOnLoad(gameObject);
         }
 
         private void OnEnable()

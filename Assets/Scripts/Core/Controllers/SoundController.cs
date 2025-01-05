@@ -1,5 +1,4 @@
-﻿using Escapa.Core.Interfaces;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Escapa.Core.Controllers
 {
@@ -20,6 +19,8 @@ namespace Escapa.Core.Controllers
 
         private void Awake()
         {
+            DontDestroyOnLoad(gameObject);
+
             _audioSource = GetComponent<AudioSource>();
             _audioSource.mute = PlayerPrefs.GetInt(PlayerPrefKey, 0) == 1;
         }
