@@ -1,15 +1,9 @@
 using Escapa.Utility;
-using UnityEngine;
-#if UNITY_WEBGL && !UNITY_EDITOR
-using Logzep.YandexSDK;
-#endif
 
 namespace Escapa.Core.Managers
 {
     public static class SocialManager
     {
-        private static float _adTime = -100;
-
         public static bool IsAuthenticated => SocialStub.localUser.authenticated;
 
         public static void CompleteAchievement(string achievementGuid)
@@ -40,15 +34,7 @@ namespace Escapa.Core.Managers
 
         public static void Auth(System.Action callback)
         {
-#if UNITY_WEBGL && !UNITY_EDITOR
-            YandexSDK.OnYSDKInit.AddListener(() =>
-            {
-                ShowAd(() => callback?.Invoke());
-            });
-            YandexSDK.Init();
-#else
             callback?.Invoke();
-#endif
         }
 
         public static void ShowAchievements()
@@ -63,29 +49,6 @@ namespace Escapa.Core.Managers
             if (!SocialStub.localUser.authenticated) return;
 
             SocialStub.ShowLeaderboardUI();
-        }
-
-        public static void ShowAd(System.Action callback)
-        {
-            if (CanShowAd())
-            {
-#if UNITY_WEBGL && !UNITY_EDITOR
-                YandexSDK.Ads.ShowAdv((res) => callback?.Invoke());
-#endif
-            }
-        }
-
-        private static bool CanShowAd()
-        {
-            var now = Time.realtimeSinceStartup;
-
-            if (now - _adTime >= 60)
-            {
-                _adTime = now;
-                return true;
-            }
-
-            return false;
         }
     }
 }
