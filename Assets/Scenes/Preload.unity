@@ -233,8 +233,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf64b865a4ad82948b7af2df62f79e17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _eventSystem: {fileID: 1617989745}
-  _backgroundMusic: {fileID: 2054303662}
 --- !u!4 &695741070
 Transform:
   m_ObjectHideFlags: 0
@@ -690,7 +688,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2054303663}
-  - component: {fileID: 2054303662}
+  - component: {fileID: 2054303665}
   - component: {fileID: 2054303661}
   - component: {fileID: 2054303664}
   m_Layer: 0
@@ -797,18 +795,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2054303662
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2054303660}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7c4fd565558ebe4097c62c12ece4ff3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2054303663
 Transform:
   m_ObjectHideFlags: 0
@@ -834,6 +820,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 391cec276a69ba133876387489283bec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2054303665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054303660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7c4fd565558ebe4097c62c12ece4ff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
