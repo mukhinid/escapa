@@ -6,6 +6,8 @@ namespace Escapa.Core.Managers
 {
     public static class ScoreManager
     {
+        private const string PlayerPrefKey = "Score{0}";
+
         public static float CurrentTime => startTime > float.Epsilon ? Time.realtimeSinceStartup - startTime : 0f;
 
         public static float LastTime { get; private set; }
@@ -47,32 +49,20 @@ namespace Escapa.Core.Managers
 
         public static float CurrentHigh
         {
-            get => highScores[(int)DifficultyManager.Current.difficulty];
-            private set => highScores[(int)DifficultyManager.Current.difficulty] = value;
-        }
-
-        public static void Save()
-        {
-            PlayerPrefs.SetFloat(PlayerPrefKeys.Score0, highScores[0]);
-            PlayerPrefs.SetFloat(PlayerPrefKeys.Score1, highScores[1]);
-            PlayerPrefs.SetFloat(PlayerPrefKeys.Score2, highScores[2]);
-            PlayerPrefs.SetFloat(PlayerPrefKeys.Score3, highScores[3]);
+            get
+            {
+                var key = string.Format(PlayerPrefKey, (int)DifficultyManager.Current.difficulty);
+                return PlayerPrefs.GetFloat(key, 0f);
+            }
+            private set
+            {
+                var key = string.Format(PlayerPrefKey, (int)DifficultyManager.Current.difficulty);
+                PlayerPrefs.SetFloat(key, value);
+            }
         }
 
         private static float startTime;
-        private static readonly float[] highScores = Load();
         private static readonly TimeConfig times = LoadConfig();
-
-        private static float[] Load()
-        {
-            return new[]
-            {
-                PlayerPrefs.GetFloat(PlayerPrefKeys.Score0, 0f),
-                PlayerPrefs.GetFloat(PlayerPrefKeys.Score1, 0f),
-                PlayerPrefs.GetFloat(PlayerPrefKeys.Score2, 0f),
-                PlayerPrefs.GetFloat(PlayerPrefKeys.Score3, 0f)
-            };
-        }
 
         private static TimeConfig LoadConfig()
         {

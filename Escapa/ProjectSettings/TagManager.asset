@@ -2,13 +2,12 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags:
-  - EventSystem
   - SoundPlayer
   - SoundButton
-  - SystemController
   - DifficultyButton
+  - BackgroundMusic
   layers:
   - Default
   - TransparentFX
@@ -52,3 +51,5 @@ TagManager:
   - name: Units
     uniqueID: 68718321
     locked: 0
+  m_RenderingLayers:
+  - Default

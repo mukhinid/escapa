@@ -8,6 +8,8 @@ namespace Escapa.Core.Managers
 {
     public static class SocialManager
     {
+        private static float _adTime = -100;
+
         public static bool IsAuthenticated => SocialStub.localUser.authenticated;
 
         public static void CompleteAchievement(string achievementGuid)
@@ -41,8 +43,7 @@ namespace Escapa.Core.Managers
 #if UNITY_WEBGL && !UNITY_EDITOR
             YandexSDK.OnYSDKInit.AddListener(() =>
             {
-                ShowAd();
-                callback?.Invoke();
+                ShowAd(() => callback?.Invoke());
             });
             YandexSDK.Init();
 #else
@@ -64,17 +65,15 @@ namespace Escapa.Core.Managers
             SocialStub.ShowLeaderboardUI();
         }
 
-        public static void ShowAd()
+        public static void ShowAd(System.Action callback)
         {
             if (CanShowAd())
             {
 #if UNITY_WEBGL && !UNITY_EDITOR
-            YandexSDK.Ads.ShowAdv();
+                YandexSDK.Ads.ShowAdv((res) => callback?.Invoke());
 #endif
             }
         }
-
-        private static float _adTime = 0;
 
         private static bool CanShowAd()
         {

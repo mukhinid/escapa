@@ -52,5 +52,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Escapa.sln"
+    "dotnet.defaultSolution": "Escapa.sln",
+    "omnisharp.useModernNet": false
 }

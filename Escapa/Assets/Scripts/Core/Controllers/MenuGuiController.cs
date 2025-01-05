@@ -1,5 +1,4 @@
-﻿using Escapa.Core.Interfaces;
-using Escapa.Core.Managers;
+﻿using Escapa.Core.Managers;
 using Escapa.Utility;
 using TMPro;
 using UnityEngine;
@@ -9,13 +8,15 @@ namespace Escapa.Core.Controllers
 {
     public sealed class MenuGuiController : GuiControllerBase
     {
+        private const string BgMusicTag = "BackgroundMusic";
+
         [SerializeField]
         private Sprite soundOn;
         [SerializeField]
         private Sprite soundOff;
 
         private TextMeshProUGUI difficultyButton;
-        private ISoundController soundController;
+        private SoundController _soundController;
         private Image soundButton;
 
         public void AddDifficulty()
@@ -32,21 +33,21 @@ namespace Escapa.Core.Controllers
 
         public void ToggleSound()
         {
-            soundController.ToggleSound();
-            soundButton.overrideSprite = soundController.IsMuted ? soundOff : soundOn;
+            _soundController.ToggleSound();
+            soundButton.overrideSprite = _soundController.IsMuted ? soundOff : soundOn;
         }
 
         private void Awake()
         {
             difficultyButton = GameObject.FindWithTag(Tags.DifficultyButton).GetComponent<TextMeshProUGUI>();
-            soundController = GameObject.FindWithTag(Tags.SystemController).GetComponent<ISoundController>();
+            _soundController = GameObject.FindWithTag(BgMusicTag).GetComponent<SoundController>();
             soundButton = GameObject.FindWithTag(Tags.SoundButton).GetComponent<Image>();
         }
 
         private void Start()
         {
             difficultyButton.SetText(GetString(DifficultyManager.Current.difficulty));
-            soundButton.overrideSprite = soundController.IsMuted ? soundOff : soundOn;
+            soundButton.overrideSprite = _soundController.IsMuted ? soundOff : soundOn;
         }
 
         private string GetString(Difficulties difficulty)

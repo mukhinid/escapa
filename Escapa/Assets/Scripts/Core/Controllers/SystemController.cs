@@ -1,4 +1,3 @@
-using Escapa.Core.Interfaces;
 using Escapa.Core.Managers;
 using Escapa.Utility;
 using UnityEngine;
@@ -8,7 +7,6 @@ using static Escapa.Core.InputSystem_Actions;
 
 namespace Escapa.Core.Controllers
 {
-    [RequireComponent(typeof(ISoundController))]
     public sealed class SystemController : MonoBehaviour, ICoreActions
     {
         private InputSystem_Actions _actions;
@@ -17,9 +15,6 @@ namespace Escapa.Core.Controllers
 
         private void Awake()
         {
-            DontDestroyOnLoad(gameObject);
-            DontDestroyOnLoad(GameObject.FindWithTag(Tags.EventSystem));
-
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 60;
         }
@@ -37,23 +32,6 @@ namespace Escapa.Core.Controllers
         }
 
         private void Start() => SocialManager.Auth(OnAuthenticated);
-
-        // If user wants to quit using Task Manager.
-        private void OnApplicationPause(bool pause)
-        {
-            if (pause)
-            {
-                DifficultyManager.Save();
-                ScoreManager.Save();
-            }
-        }
-
-        // If user wants to quit the usual way.
-        private void OnApplicationQuit()
-        {
-            DifficultyManager.Save();
-            ScoreManager.Save();
-        }
 
         private void OnDisable()
         {

@@ -6,8 +6,10 @@ namespace Escapa.Core.Managers
 {
     public static class DifficultyManager
     {
+        private const string PlayerPrefKey = "Difficulty";
+
         private static readonly Level[] levels = Load();
-        private static int currentDifficulty = PlayerPrefs.GetInt(PlayerPrefKeys.Difficulty, 0);
+        private static int currentDifficulty = PlayerPrefs.GetInt(PlayerPrefKey, 0);
 
         public static event GameEvent DifficultyChanged;
 
@@ -18,6 +20,7 @@ namespace Escapa.Core.Managers
             currentDifficulty = Current.difficulty == Difficulties.Insane
                 ? (int)Difficulties.Easy
                 : currentDifficulty + 1;
+            PlayerPrefs.SetInt(PlayerPrefKey, currentDifficulty);
             DifficultyChanged?.Invoke();
         }
 
@@ -26,10 +29,9 @@ namespace Escapa.Core.Managers
             currentDifficulty = Current.difficulty == Difficulties.Easy
                 ? (int)Difficulties.Insane
                 : currentDifficulty - 1;
+            PlayerPrefs.SetInt(PlayerPrefKey, currentDifficulty);
             DifficultyChanged?.Invoke();
         }
-
-        public static void Save() => PlayerPrefs.SetInt(PlayerPrefKeys.Difficulty, currentDifficulty);
 
         private static Level[] Load()
         {
