@@ -16,6 +16,10 @@
     <canvas id="unity-canvas" tabindex="-1" style="aspect-ratio: 6 / 10; height: 100vh; width: auto; background: {{{ BACKGROUND_FILENAME ? 'url(\'Build/' + BACKGROUND_FILENAME.replace(/'/g, '%27') + '\') center / cover' : BACKGROUND_COLOR }}}"></canvas>
     <script src="Build/{{{ LOADER_FILENAME }}}"></script>
     <script>
+      document.addEventListener('contextmenu', event => {
+        event.preventDefault();
+      });
+
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         // Mobile device style: fill the whole browser client area with the game canvas:
         var meta = document.createElement('meta');
