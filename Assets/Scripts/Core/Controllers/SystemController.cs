@@ -1,4 +1,3 @@
-using Escapa.Core.Managers;
 using Escapa.Utility;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,14 +8,18 @@ namespace Escapa.Core.Controllers
 {
     public sealed class SystemController : MonoBehaviour, ICoreActions
     {
-        private InputSystem_Actions _actions;
+        [SerializeField]
+        private SocialController _social;
 
+        private InputSystem_Actions _actions;
         private GameScenes current;
 
         private void Awake()
         {
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 60;
+
+            DontDestroyOnLoad(gameObject);
         }
 
         private void OnEnable()
@@ -31,7 +34,7 @@ namespace Escapa.Core.Controllers
             _actions.Core.Enable();
         }
 
-        private void Start() => SocialManager.Auth(OnAuthenticated);
+        private void Start() => _social.Init(OnAuthenticated);
 
         private void OnDisable()
         {

@@ -1,4 +1,4 @@
-﻿using Escapa.Core.Interfaces;
+﻿using System;
 using UnityEngine;
 
 namespace Escapa.Core.Controllers
@@ -7,6 +7,9 @@ namespace Escapa.Core.Controllers
     public sealed class SoundController : MonoBehaviour
     {
         private const string PlayerPrefKey = "IsSoundMuted";
+
+        [SerializeField]
+        private SocialController _social;
 
         private AudioSource _audioSource;
 
@@ -20,13 +23,32 @@ namespace Escapa.Core.Controllers
 
         private void Awake()
         {
+            DontDestroyOnLoad(gameObject);
+
             _audioSource = GetComponent<AudioSource>();
             _audioSource.mute = PlayerPrefs.GetInt(PlayerPrefKey, 0) == 1;
         }
 
-        private void OnApplicationFocus(bool focus)
+        private void OnEnable()
         {
-            _audioSource.mute = !focus;
+            _social.AdStarted += OnAdStarted;
+            _social.AdFinished += OnAdFinished;
+        }
+
+        private void OnDisable()
+        {
+            _social.AdStarted -= OnAdStarted;
+            _social.AdFinished -= OnAdFinished;
+        }
+
+        private void OnAdStarted(object sender, EventArgs e)
+        {
+            _audioSource.Pause();
+        }
+
+        private void OnAdFinished(object sender, EventArgs e)
+        {
+            _audioSource.UnPause();
         }
     }
 }

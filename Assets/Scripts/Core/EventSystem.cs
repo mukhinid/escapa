@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Escapa.Core.Components
+namespace Escapa.Core
 {
-    public sealed class DontDestroy : MonoBehaviour
+    public sealed class EventSystem : MonoBehaviour
     {
         private void Awake()
         {

@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: re::public
+  companyName: "\u0412\u0438\u0434\u0435\u043E\u0422\u0438\u0433\u0440\u044B"
   productName: escapa
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -732,7 +732,7 @@ PlayerSettings:
   webGLWasmArithmeticExceptions: 0
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
-  webGLDecompressionFallback: 1
+  webGLDecompressionFallback: 0
   webGLInitialMemorySize: 32
   webGLMaximumMemorySize: 2048
   webGLMemoryGrowthMode: 2
