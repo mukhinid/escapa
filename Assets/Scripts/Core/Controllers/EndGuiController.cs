@@ -1,4 +1,3 @@
-using Escapa.Core.Yandex;
 using Escapa.Utility;
 using UnityEngine;
 
@@ -6,21 +5,21 @@ namespace Escapa.Core.Controllers
 {
     public class EndGuiController : GuiControllerBase
     {
-        private YaGames _yaGames;
+        private SocialController _social;
 
         private void Awake()
         {
-            _yaGames = GameObject.FindWithTag("YaGames").GetComponent<YaGames>();
+            _social = GameObject.FindWithTag("YaGames").GetComponent<SocialController>();
         }
 
         public void Restart()
         {
-            _yaGames.ShowAd(() => LoadScene(GameScenes.Game));
+            _social.ShowAd(() => LoadScene(GameScenes.Game));
         }
 
         public void GoToMenu()
         {
-            _yaGames.ShowAd(() => LoadScene(GameScenes.Menu));
+            _social.ShowAd(() => LoadScene(GameScenes.Menu));
         }
     }
 }

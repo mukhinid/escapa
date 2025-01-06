@@ -1,5 +1,4 @@
 ﻿using System;
-using Escapa.Core.Yandex;
 using UnityEngine;
 
 namespace Escapa.Core.Controllers
@@ -10,7 +9,7 @@ namespace Escapa.Core.Controllers
         private const string PlayerPrefKey = "IsSoundMuted";
 
         [SerializeField]
-        private YaGames _yaGames;
+        private SocialController _social;
 
         private AudioSource _audioSource;
 
@@ -32,14 +31,14 @@ namespace Escapa.Core.Controllers
 
         private void OnEnable()
         {
-            _yaGames.AdStarted += OnAdStarted;
-            _yaGames.AdFinished += OnAdFinished;
+            _social.AdStarted += OnAdStarted;
+            _social.AdFinished += OnAdFinished;
         }
 
         private void OnDisable()
         {
-            _yaGames.AdStarted -= OnAdStarted;
-            _yaGames.AdFinished -= OnAdFinished;
+            _social.AdStarted -= OnAdStarted;
+            _social.AdFinished -= OnAdFinished;
         }
 
         private void OnAdStarted(object sender, EventArgs e)
