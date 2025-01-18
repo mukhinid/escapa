@@ -9,7 +9,9 @@ using static Escapa.Core.InputSystem_Actions;
 
 namespace Escapa.Game
 {
-    [RequireComponent(typeof(BoxCollider2D), typeof(SpriteRenderer))]
+    [RequireComponent(typeof(BoxCollider2D))]
+    [RequireComponent(typeof(SpriteRenderer))]
+    [RequireComponent(typeof(Scale))]
     public sealed class Player : MonoBehaviour, IPlayer, IPlayerActions
     {
         public event GameEvent Died;

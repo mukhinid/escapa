@@ -5,7 +5,10 @@ using UnityEngine;
 
 namespace Escapa.Game
 {
-    [RequireComponent(typeof(BoxCollider2D), typeof(Rigidbody2D), typeof(SpriteRenderer))]
+    [RequireComponent(typeof(BoxCollider2D))]
+    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(SpriteRenderer))]
+    [RequireComponent(typeof(Scale))]
     public sealed class Enemy : MonoBehaviour
     {
         [SerializeField]
