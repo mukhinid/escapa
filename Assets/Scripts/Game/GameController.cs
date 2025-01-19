@@ -1,3 +1,4 @@
+using Escapa.Core;
 using Escapa.Core.Events;
 using Escapa.Core.Interfaces;
 using Escapa.Core.Managers;
@@ -7,7 +8,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static Escapa.Core.InputSystem_Actions;
 
-namespace Escapa.Core.Controllers
+namespace Escapa.Game
 {
     public sealed class GameController : MonoBehaviour, ICoreActions
     {
