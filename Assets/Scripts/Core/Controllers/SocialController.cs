@@ -11,8 +11,8 @@ namespace Escapa.Core.Controllers
     {
         private float _adTime = -100;
 
-        public event EventHandler AdStarted;
-        public event EventHandler AdFinished;
+        public event Action AdStarted;
+        public event Action AdFinished;
 
         public void Init(Action callback)
         {
@@ -30,13 +30,13 @@ namespace Escapa.Core.Controllers
         {
             if (CanShowAd())
             {
-                AdStarted?.Invoke(this, null);
+                AdStarted?.Invoke();
                 #if UNITY_WEBGL && !UNITY_EDITOR
                     #if YAGAMES_ENABLED
                         ShowAdYandex((result) => callback?.Invoke());
                     #endif
                 #else
-                    AdFinished?.Invoke(this, null);
+                    AdFinished?.Invoke();
                     callback?.Invoke();
                 #endif
             }
@@ -74,7 +74,7 @@ namespace Escapa.Core.Controllers
                 {
                     if (result != AdvResult.Open)
                     {
-                        AdFinished?.Invoke(this, null);
+                        AdFinished?.Invoke();
                     }
                 });
                 ShowAd(callback);
