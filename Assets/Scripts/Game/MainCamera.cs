@@ -1,5 +1,4 @@
-﻿using Escapa.Core.Interfaces;
-using Escapa.Core.Managers;
+﻿using Escapa.Core.Managers;
 using Escapa.Utility;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,19 +6,19 @@ using UnityEngine.SceneManagement;
 namespace Escapa.Game
 {
     [RequireComponent(typeof(Camera))]
-    public sealed class MainCamera : MonoBehaviour, IMainCamera
+    public sealed class MainCamera : MonoBehaviour
     {
-        public float UnitsPerPixel => camera.orthographicSize * 2.0f / Screen.height;
+        public float UnitsPerPixel => _camera.orthographicSize * 2.0f / Screen.height;
 
-        public Vector2 ScreenToWorldPoint(Vector2 point) => camera.ScreenToWorldPoint(point);
+        public Vector2 ScreenToWorldPoint(Vector2 point) => _camera.ScreenToWorldPoint(point);
 
-        private new Camera camera;
+        private Camera _camera;
 
         private void Awake()
         {
             DontDestroyOnLoad(gameObject);
 
-            camera = GetComponent<Camera>();
+            _camera = GetComponent<Camera>();
         }
 
         private void OnEnable()
@@ -34,12 +33,12 @@ namespace Escapa.Game
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 
-        private void OnDifficultyChanged() => camera.backgroundColor = StyleManager.Colors.Background;
+        private void OnDifficultyChanged() => _camera.backgroundColor = StyleManager.Colors.Background;
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
             if (scene.buildIndex != (int)GameScenes.Preload)
-                camera.backgroundColor = StyleManager.Colors.Background;
+                _camera.backgroundColor = StyleManager.Colors.Background;
         }
     }
 }

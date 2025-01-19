@@ -18,7 +18,15 @@ namespace Escapa.Game
 
         private void Start()
         {
-            _renderer.color = StyleManager.Colors.Player;
+            _renderer.color = _color switch
+            {
+                StylingColor.Background => StyleManager.Colors.Background,
+                StylingColor.Enemy => StyleManager.Colors.Enemy,
+                StylingColor.Player => StyleManager.Colors.Player,
+                StylingColor.Text => StyleManager.Colors.Text,
+                StylingColor.TextAlfa => StyleManager.Colors.TextAlfa,
+                _ => Color.white,
+            };
         }
     }
 }

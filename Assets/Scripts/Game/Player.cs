@@ -19,7 +19,7 @@ namespace Escapa.Game
 
         private InputSystem_Actions _actions;
 
-        private new IMainCamera camera;
+        private MainCamera _camera;
 
         private bool isTouched;
         private Vector2 oldPosition;
@@ -29,7 +29,7 @@ namespace Escapa.Game
 
         private void Awake()
         {
-            camera = GameObject.FindWithTag(Tags.MainCamera).GetComponent<IMainCamera>();
+            _camera = GameObject.FindWithTag(Tags.MainCamera).GetComponent<MainCamera>();
         }
 
         private void OnEnable()
@@ -63,7 +63,7 @@ namespace Escapa.Game
 
         public void OnMove(InputAction.CallbackContext context)
         {
-            var position = camera.ScreenToWorldPoint(context.ReadValue<Vector2>());
+            var position = _camera.ScreenToWorldPoint(context.ReadValue<Vector2>());
             isTouched = IsTouched(position, targetPosition);
 
             if (isTouched)
