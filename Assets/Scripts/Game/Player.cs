@@ -1,6 +1,5 @@
 using System;
 using Escapa.Core;
-using Escapa.Utility;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static Escapa.Core.InputSystem_Actions;
@@ -16,20 +15,16 @@ namespace Escapa.Game
         public event Action Pressed;
         public event Action Stopped;
 
-        private InputSystem_Actions _actions;
-
+        [SerializeField]
         private MainCamera _camera;
+
+        private InputSystem_Actions _actions;
 
         private bool isTouched;
         private Vector2 oldPosition;
         private Vector2 targetPosition;
 
         private const float Width = 0.75f;
-
-        private void Awake()
-        {
-            _camera = GameObject.FindWithTag(Tags.MainCamera).GetComponent<MainCamera>();
-        }
 
         private void OnEnable()
         {
