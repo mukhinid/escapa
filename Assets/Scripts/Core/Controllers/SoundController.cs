@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Escapa.Core.Controllers
 {
@@ -41,12 +40,12 @@ namespace Escapa.Core.Controllers
             _social.AdFinished -= OnAdFinished;
         }
 
-        private void OnAdStarted(object sender, EventArgs e)
+        private void OnAdStarted()
         {
             _audioSource.Pause();
         }
 
-        private void OnAdFinished(object sender, EventArgs e)
+        private void OnAdFinished()
         {
             _audioSource.UnPause();
         }

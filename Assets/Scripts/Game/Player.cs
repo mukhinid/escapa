@@ -1,7 +1,5 @@
+using System;
 using Escapa.Core;
-using Escapa.Core.Events;
-using Escapa.Core.Interfaces;
-using Escapa.Utility;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static Escapa.Core.InputSystem_Actions;
@@ -10,27 +8,23 @@ namespace Escapa.Game
 {
     [RequireComponent(typeof(BoxCollider2D))]
     [RequireComponent(typeof(Scale))]
-    public sealed class Player : MonoBehaviour, IPlayer, IPlayerActions
+    public sealed class Player : MonoBehaviour, IPlayerActions
     {
-        public event GameEvent Died;
-        public event GameEvent Moved;
-        public event GameEvent Pressed;
-        public event GameEvent Stopped;
+        public event Action Died;
+        public event Action Moved;
+        public event Action Pressed;
+        public event Action Stopped;
+
+        [SerializeField]
+        private MainCamera _camera;
 
         private InputSystem_Actions _actions;
-
-        private MainCamera _camera;
 
         private bool isTouched;
         private Vector2 oldPosition;
         private Vector2 targetPosition;
 
         private const float Width = 0.75f;
-
-        private void Awake()
-        {
-            _camera = GameObject.FindWithTag(Tags.MainCamera).GetComponent<MainCamera>();
-        }
 
         private void OnEnable()
         {
@@ -63,6 +57,11 @@ namespace Escapa.Game
 
         public void OnMove(InputAction.CallbackContext context)
         {
+            if (!_camera)
+            {
+                return;
+            }
+
             var position = _camera.ScreenToWorldPoint(context.ReadValue<Vector2>());
             isTouched = IsTouched(position, targetPosition);
 

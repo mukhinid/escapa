@@ -1,5 +1,5 @@
-using Escapa.Core.Events;
-using Escapa.Core.Interfaces;
+using System;
+using Escapa.Core;
 using Escapa.Core.Managers;
 using Escapa.Utility;
 using UnityEngine;
@@ -7,20 +7,19 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static Escapa.Core.InputSystem_Actions;
 
-namespace Escapa.Core.Controllers
+namespace Escapa.Game
 {
     public sealed class GameController : MonoBehaviour, ICoreActions
     {
-        public event GameEvent GameStarted;
+        public event Action GameStarted;
+
+        [SerializeField]
+        private Player player;
 
         private InputSystem_Actions _actions;
 
-        private IPlayer player;
-
         private float? idleTime;
         private float? movingTime;
-
-        private void Awake() => player = GameObject.FindWithTag(Tags.Player).GetComponent<IPlayer>();
 
         private void OnEnable()
         {
