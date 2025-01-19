@@ -439,6 +439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 2
+  _gameController: {fileID: 2033819630}
 --- !u!212 &678382665
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1275,6 +1276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 0
+  _gameController: {fileID: 2033819630}
 --- !u!212 &1341320090
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1727,6 +1729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 3
+  _gameController: {fileID: 2033819630}
 --- !u!212 &1988401809
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1978,6 +1981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 1
+  _gameController: {fileID: 2033819630}
 --- !u!212 &2011403335
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ using static Escapa.Core.InputSystem_Actions;
 
 namespace Escapa.Core.Controllers
 {
-    public sealed class GameController : MonoBehaviour, IGameController, ICoreActions
+    public sealed class GameController : MonoBehaviour, ICoreActions
     {
         public event GameEvent GameStarted;
 
