@@ -1,7 +1,6 @@
 using Escapa.Core;
 using Escapa.Core.Events;
 using Escapa.Core.Interfaces;
-using Escapa.Core.Managers;
 using Escapa.Utility;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,7 +8,8 @@ using static Escapa.Core.InputSystem_Actions;
 
 namespace Escapa.Game
 {
-    [RequireComponent(typeof(BoxCollider2D), typeof(SpriteRenderer))]
+    [RequireComponent(typeof(BoxCollider2D))]
+    [RequireComponent(typeof(Scale))]
     public sealed class Player : MonoBehaviour, IPlayer, IPlayerActions
     {
         public event GameEvent Died;
@@ -19,8 +19,7 @@ namespace Escapa.Game
 
         private InputSystem_Actions _actions;
 
-        private new IMainCamera camera;
-        private SpriteRenderer spriteRenderer;
+        private MainCamera _camera;
 
         private bool isTouched;
         private Vector2 oldPosition;
@@ -30,8 +29,7 @@ namespace Escapa.Game
 
         private void Awake()
         {
-            camera = GameObject.FindWithTag(Tags.MainCamera).GetComponent<IMainCamera>();
-            spriteRenderer = GetComponent<SpriteRenderer>();
+            _camera = GameObject.FindWithTag(Tags.MainCamera).GetComponent<MainCamera>();
         }
 
         private void OnEnable()
@@ -43,8 +41,6 @@ namespace Escapa.Game
             }
             _actions.Player.Enable();
         }
-
-        private void Start() => spriteRenderer.color = StyleManager.Colors.Player;
 
         private void Update()
         {
@@ -67,7 +63,7 @@ namespace Escapa.Game
 
         public void OnMove(InputAction.CallbackContext context)
         {
-            var position = camera.ScreenToWorldPoint(context.ReadValue<Vector2>());
+            var position = _camera.ScreenToWorldPoint(context.ReadValue<Vector2>());
             isTouched = IsTouched(position, targetPosition);
 
             if (isTouched)
