@@ -1,7 +1,6 @@
 using Escapa.Core;
 using Escapa.Core.Events;
 using Escapa.Core.Interfaces;
-using Escapa.Core.Managers;
 using Escapa.Utility;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,7 +9,6 @@ using static Escapa.Core.InputSystem_Actions;
 namespace Escapa.Game
 {
     [RequireComponent(typeof(BoxCollider2D))]
-    [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(Scale))]
     public sealed class Player : MonoBehaviour, IPlayer, IPlayerActions
     {
@@ -22,7 +20,6 @@ namespace Escapa.Game
         private InputSystem_Actions _actions;
 
         private new IMainCamera camera;
-        private SpriteRenderer spriteRenderer;
 
         private bool isTouched;
         private Vector2 oldPosition;
@@ -33,7 +30,6 @@ namespace Escapa.Game
         private void Awake()
         {
             camera = GameObject.FindWithTag(Tags.MainCamera).GetComponent<IMainCamera>();
-            spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
         private void OnEnable()
@@ -45,8 +41,6 @@ namespace Escapa.Game
             }
             _actions.Player.Enable();
         }
-
-        private void Start() => spriteRenderer.color = StyleManager.Colors.Player;
 
         private void Update()
         {

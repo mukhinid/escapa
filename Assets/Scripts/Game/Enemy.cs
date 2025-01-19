@@ -7,7 +7,6 @@ namespace Escapa.Game
 {
     [RequireComponent(typeof(BoxCollider2D))]
     [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(Scale))]
     public sealed class Enemy : MonoBehaviour
     {
@@ -18,13 +17,11 @@ namespace Escapa.Game
         private float maxSpeed;
 
         private new Rigidbody2D rigidbody2D;
-        private SpriteRenderer spriteRenderer;
         private IGameController gameController;
 
         private void Awake()
         {
             rigidbody2D = GetComponent<Rigidbody2D>();
-            spriteRenderer = GetComponent<SpriteRenderer>();
 
             gameController = GameObject.FindWithTag(Tags.GameController).GetComponent<IGameController>();
         }
@@ -39,7 +36,6 @@ namespace Escapa.Game
             {
                 minSpeed = DifficultyManager.Current.minSpeed;
                 maxSpeed = DifficultyManager.Current.maxSpeed;
-                spriteRenderer.color = StyleManager.Colors.Enemy;
             }
         }
 

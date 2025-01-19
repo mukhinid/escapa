@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 144588647}
   - component: {fileID: 144588646}
   - component: {fileID: 144588651}
+  - component: {fileID: 144588652}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -279,6 +280,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a16de28ea308be3086edd9e40409ad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &144588652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144588645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98a0a448bd5f769eea843c4cf70a7f22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _color: 2
 --- !u!850595691 &561492051
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -389,6 +403,7 @@ GameObject:
   - component: {fileID: 678382665}
   - component: {fileID: 678382664}
   - component: {fileID: 678382668}
+  - component: {fileID: 678382669}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -564,6 +579,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a16de28ea308be3086edd9e40409ad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &678382669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678382662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98a0a448bd5f769eea843c4cf70a7f22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _color: 1
 --- !u!1 &906661636
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,6 +1239,7 @@ GameObject:
   - component: {fileID: 1341320090}
   - component: {fileID: 1341320089}
   - component: {fileID: 1341320093}
+  - component: {fileID: 1341320094}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -1386,6 +1415,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a16de28ea308be3086edd9e40409ad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1341320094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341320087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98a0a448bd5f769eea843c4cf70a7f22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _color: 1
 --- !u!1 &1534117915
 GameObject:
   m_ObjectHideFlags: 0
@@ -1649,6 +1691,7 @@ GameObject:
   - component: {fileID: 1988401809}
   - component: {fileID: 1988401808}
   - component: {fileID: 1988401812}
+  - component: {fileID: 1988401813}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -1824,6 +1867,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a16de28ea308be3086edd9e40409ad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1988401813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988401806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98a0a448bd5f769eea843c4cf70a7f22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _color: 1
 --- !u!1 &2008005957
 GameObject:
   m_ObjectHideFlags: 0
@@ -1886,6 +1942,7 @@ GameObject:
   - component: {fileID: 2011403335}
   - component: {fileID: 2011403334}
   - component: {fileID: 2011403338}
+  - component: {fileID: 2011403339}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -2061,6 +2118,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a16de28ea308be3086edd9e40409ad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2011403339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011403332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98a0a448bd5f769eea843c4cf70a7f22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _color: 1
 --- !u!1 &2033819629
 GameObject:
   m_ObjectHideFlags: 0
