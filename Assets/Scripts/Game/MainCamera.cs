@@ -16,8 +16,6 @@ namespace Escapa.Game
 
         private void Awake()
         {
-            DontDestroyOnLoad(gameObject);
-
             _camera = GetComponent<Camera>();
         }
 

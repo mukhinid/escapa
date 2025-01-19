@@ -62,6 +62,11 @@ namespace Escapa.Game
 
         public void OnMove(InputAction.CallbackContext context)
         {
+            if (!_camera)
+            {
+                return;
+            }
+
             var position = _camera.ScreenToWorldPoint(context.ReadValue<Vector2>());
             isTouched = IsTouched(position, targetPosition);
 

@@ -36,6 +36,7 @@ namespace Escapa.Core.Controllers
                         ShowAdYandex((result) => callback?.Invoke());
                     #endif
                 #else
+                    AdFinished?.Invoke(this, null);
                     callback?.Invoke();
                 #endif
             }
