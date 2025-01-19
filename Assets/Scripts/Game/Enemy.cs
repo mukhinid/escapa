@@ -1,4 +1,4 @@
-﻿using Escapa.Core.Interfaces;
+﻿using Escapa.Core.Controllers;
 using Escapa.Core.Managers;
 using Escapa.Utility;
 using UnityEngine;
@@ -12,21 +12,20 @@ namespace Escapa.Game
     {
         [SerializeField]
         private Difficulties difficulty;
+        [SerializeField]
+        private GameController _gameController;
 
         private float minSpeed;
         private float maxSpeed;
 
         private new Rigidbody2D rigidbody2D;
-        private IGameController gameController;
 
         private void Awake()
         {
             rigidbody2D = GetComponent<Rigidbody2D>();
-
-            gameController = GameObject.FindWithTag(Tags.GameController).GetComponent<IGameController>();
         }
 
-        private void OnEnable() => gameController.GameStarted += OnGameStarted;
+        private void OnEnable() => _gameController.GameStarted += OnGameStarted;
 
         private void Start()
         {
@@ -39,7 +38,7 @@ namespace Escapa.Game
             }
         }
 
-        private void OnDisable() => gameController.GameStarted -= OnGameStarted;
+        private void OnDisable() => _gameController.GameStarted -= OnGameStarted;
 
         private void OnGameStarted()
         {
