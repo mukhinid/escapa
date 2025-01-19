@@ -1,6 +1,5 @@
 using Escapa.Core;
 using Escapa.Core.Events;
-using Escapa.Core.Interfaces;
 using Escapa.Utility;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,7 +9,7 @@ namespace Escapa.Game
 {
     [RequireComponent(typeof(BoxCollider2D))]
     [RequireComponent(typeof(Scale))]
-    public sealed class Player : MonoBehaviour, IPlayer, IPlayerActions
+    public sealed class Player : MonoBehaviour, IPlayerActions
     {
         public event GameEvent Died;
         public event GameEvent Moved;

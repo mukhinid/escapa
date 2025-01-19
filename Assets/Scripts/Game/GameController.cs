@@ -1,6 +1,5 @@
 using Escapa.Core;
 using Escapa.Core.Events;
-using Escapa.Core.Interfaces;
 using Escapa.Core.Managers;
 using Escapa.Utility;
 using UnityEngine;
@@ -14,14 +13,13 @@ namespace Escapa.Game
     {
         public event GameEvent GameStarted;
 
-        private InputSystem_Actions _actions;
+        [SerializeField]
+        private Player player;
 
-        private IPlayer player;
+        private InputSystem_Actions _actions;
 
         private float? idleTime;
         private float? movingTime;
-
-        private void Awake() => player = GameObject.FindWithTag(Tags.Player).GetComponent<IPlayer>();
 
         private void OnEnable()
         {
