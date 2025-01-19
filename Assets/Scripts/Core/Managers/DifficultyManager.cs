@@ -1,4 +1,4 @@
-﻿using Escapa.Core.Events;
+﻿using System;
 using Escapa.Utility;
 using UnityEngine;
 
@@ -11,7 +11,7 @@ namespace Escapa.Core.Managers
         private static readonly Level[] levels = Load();
         private static int currentDifficulty = PlayerPrefs.GetInt(PlayerPrefKey, 0);
 
-        public static event GameEvent DifficultyChanged;
+        public static event Action DifficultyChanged;
 
         public static Level Current => levels[currentDifficulty];
 

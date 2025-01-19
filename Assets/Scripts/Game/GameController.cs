@@ -1,5 +1,5 @@
+using System;
 using Escapa.Core;
-using Escapa.Core.Events;
 using Escapa.Core.Managers;
 using Escapa.Utility;
 using UnityEngine;
@@ -11,7 +11,7 @@ namespace Escapa.Game
 {
     public sealed class GameController : MonoBehaviour, ICoreActions
     {
-        public event GameEvent GameStarted;
+        public event Action GameStarted;
 
         [SerializeField]
         private Player player;

@@ -1,5 +1,5 @@
+using System;
 using Escapa.Core;
-using Escapa.Core.Events;
 using Escapa.Utility;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,10 +11,10 @@ namespace Escapa.Game
     [RequireComponent(typeof(Scale))]
     public sealed class Player : MonoBehaviour, IPlayerActions
     {
-        public event GameEvent Died;
-        public event GameEvent Moved;
-        public event GameEvent Pressed;
-        public event GameEvent Stopped;
+        public event Action Died;
+        public event Action Moved;
+        public event Action Pressed;
+        public event Action Stopped;
 
         private InputSystem_Actions _actions;
 
