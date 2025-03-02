@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static Escapa.Core.InputSystem_Actions;
+using SM = Escapa.Social.SocialManager;
 
 namespace Escapa.Core.Controllers
 {
@@ -34,7 +35,7 @@ namespace Escapa.Core.Controllers
             _actions.Core.Enable();
         }
 
-        private void Start() => _social.Init(OnAuthenticated);
+        private void Start() => SM.Init(OnAuthenticated);
 
         private void OnDisable()
         {

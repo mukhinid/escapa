@@ -1,8 +1,6 @@
-using Logzep.YandexSDK;
-using Logzep.YandexSDK.Advertising;
 using System;
 using UnityEngine;
-using UnityEngine.Events;
+using SM = Escapa.Social.SocialManager;
 
 namespace Escapa.Core.Controllers
 {
@@ -13,30 +11,19 @@ namespace Escapa.Core.Controllers
         public event Action AdStarted;
         public event Action AdFinished;
 
-        public void Init(Action callback)
-        {
-            #if UNITY_WEBGL && !UNITY_EDITOR
-                #if YAGAMES_ENABLED
-                    InitYandex(callback);
-                #endif
-            #else
-                callback?.Invoke();
-            #endif
-        }
-
         public void ShowAd(Action callback)
         {
             if (CanShowAd())
             {
                 AdStarted?.Invoke();
-                #if UNITY_WEBGL && !UNITY_EDITOR
-                    #if YAGAMES_ENABLED
-                        ShowAdYandex((result) => callback?.Invoke());
-                    #endif
-                #else
-                    AdFinished?.Invoke();
+                SM.ShowAd(result =>
+                {
+                    if (result != Social.AdvertShownResult.Open)
+                    {
+                        AdFinished?.Invoke();
+                    }
                     callback?.Invoke();
-                #endif
+                });
             }
             else
             {
@@ -60,27 +47,6 @@ namespace Escapa.Core.Controllers
             }
 
             return false;
-        }
-
-        private void InitYandex(Action callback)
-        {
-            YandexSDK.OnYSDKInit.AddListener(() =>
-            {
-                YandexSDK.Ads.OnAdvertShown.AddListener((result) =>
-                {
-                    if (result != AdvResult.Open)
-                    {
-                        AdFinished?.Invoke();
-                    }
-                });
-                ShowAd(callback);
-            });
-            YandexSDK.Init();
-        }
-
-        private void ShowAdYandex(UnityAction<AdvResult> resultCallback)
-        {
-            YandexSDK.Ads.ShowAdv(resultCallback);
         }
     }
 }

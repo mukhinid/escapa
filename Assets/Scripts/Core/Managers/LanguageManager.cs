@@ -1,9 +1,7 @@
 using Escapa.Utility;
-#if YAGAMES_ENABLED
-using Logzep.YandexSDK;
-#endif
 using System;
 using UnityEngine;
+using SM = Escapa.Social.SocialManager;
 
 namespace Escapa.Core.Managers
 {
@@ -16,7 +14,7 @@ namespace Escapa.Core.Managers
         {
             string lang;
             #if YAGAMES_ENABLED
-                lang = YandexSDK.Env.Lang.ToLower();
+                lang = SM.GetLanguage();
                 if (lang != "fr" &&  lang != "de" && lang != "ru" && lang != "es")
                 {
                     lang = "en";
