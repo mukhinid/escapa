@@ -1,4 +1,3 @@
-using Escapa.Core.Managers;
 using Logzep.YandexSDK;
 using Logzep.YandexSDK.Advertising;
 using System;
@@ -21,7 +20,6 @@ namespace Escapa.Core.Controllers
                     InitYandex(callback);
                 #endif
             #else
-                LanguageManager.Load(GetLang());
                 callback?.Invoke();
             #endif
         }
@@ -68,8 +66,6 @@ namespace Escapa.Core.Controllers
         {
             YandexSDK.OnYSDKInit.AddListener(() =>
             {
-                LanguageManager.Load(GetLang());
-
                 YandexSDK.Ads.OnAdvertShown.AddListener((result) =>
                 {
                     if (result != AdvResult.Open)
@@ -85,29 +81,6 @@ namespace Escapa.Core.Controllers
         private void ShowAdYandex(UnityAction<AdvResult> resultCallback)
         {
             YandexSDK.Ads.ShowAdv(resultCallback);
-        }
-
-        private string GetLang()
-        {
-            #if UNITY_WEBGL && !UNITY_EDITOR
-                #if YAGAMES_ENABLED
-                    var lang = YandexSDK.Env.Lang.ToLower();
-                    if (lang != "fr" &&  lang != "de" && lang != "ru" && lang != "es")
-                    {
-                        return "en";
-                    }
-                    return lang;
-                #endif
-            #endif
-
-            return Application.systemLanguage switch
-            {
-                SystemLanguage.French => "fr",
-                SystemLanguage.German => "de",
-                SystemLanguage.Russian => "ru",
-                SystemLanguage.Spanish => "es",
-                _ => "en",
-            };
         }
     }
 }
