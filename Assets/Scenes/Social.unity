@@ -265,7 +265,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81649e9bece0434fa4565af1e737b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSocialButton: 1
 --- !u!1 &171463069
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,7 +316,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81649e9bece0434fa4565af1e737b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSocialButton: 0
 --- !u!114 &171463072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -714,6 +712,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93eb6e68063f99046a6fc7f2d66e536d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _achievementsButton: {fileID: 2045183721}
+  _lbButton: {fileID: 73162303}
 --- !u!4 &1046121491
 Transform:
   m_ObjectHideFlags: 0
@@ -970,7 +970,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81649e9bece0434fa4565af1e737b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSocialButton: 1
 --- !u!1 &2057701695
 GameObject:
   m_ObjectHideFlags: 0

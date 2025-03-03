@@ -40,4 +40,18 @@ mergeInto(LibraryManager.library, {
       },
   })},
 
+  IsAuthorized: function() {
+    if (window.player) {
+      return window.player.getMode() !== 'lite';
+    }
+    return false;
+  },
+
+  SendScore: function(lbName, score) {
+    window.ysdk.getLeaderboards().then(lb => {
+      const name = UTF8ToString(lbName);
+      lb.setLeaderboardScore(name, score);
+    });
+  },
+
 });

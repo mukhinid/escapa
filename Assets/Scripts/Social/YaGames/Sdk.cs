@@ -40,6 +40,12 @@ namespace Escapa.Social.YaGames
         [DllImport("__Internal")]
         private static extern void ShowFullScreenAdv(Action<int> callback);
 
+        [DllImport("__Internal")]
+        public static extern bool IsAuthorized();
+
+        [DllImport("__Internal")]
+        public static extern void SendScore(string lbName, long score);
+
         [MonoPInvokeCallback(typeof(Action))]
         private static void OnInitCallback()
         {

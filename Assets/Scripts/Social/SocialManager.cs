@@ -53,6 +53,35 @@ namespace Escapa.Social
             }
         }
 
+        public static bool IsAuthorized
+        {
+            get
+            {
+                #if YAGAMES_ENABLED
+                    return Sdk.IsAuthorized();
+                #else
+                    return false;
+                #endif
+            }
+        }
+
+        public static void SendScore(long time, int difficulty)
+        {
+            if (!IsAuthorized)
+            {
+                return;
+            }
+
+            var id = difficulty switch
+            {
+                1 => "medium1",
+                2 => "hard1",
+                3 => "insane1",
+                _ => "easy1",
+            };
+            Sdk.SendScore(id, time);
+        }
+
         private static bool CanShowAd()
         {
             var now = Time.realtimeSinceStartup;
