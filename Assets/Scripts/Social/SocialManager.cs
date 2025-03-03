@@ -6,6 +6,11 @@ namespace Escapa.Social
 {
     public static class SocialManager
     {
+        private static float _adTime = -100;
+
+        public static event Action AdStarted;
+        public static event Action AdFinished;
+
         public static void Init(Action callback)
         {
             #if YAGAMES_ENABLED
@@ -17,16 +22,48 @@ namespace Escapa.Social
 
         public static string GetLanguage()
         {
-            return Sdk.Environment.i18n.lang.ToLower();
+            #if YAGAMES_ENABLED
+                return Sdk.Environment.i18n.lang.ToLower();
+            #else
+                return "en";
+            #endif
         }
 
-        public static void ShowAd(Action<AdvertShownResult> resultCallback)
+        public static void ShowAd(Action callback)
         {
-            #if YAGAMES_ENABLED
-                Sdk.ShowFullScreenAdv(resultCallback);
-            #else
-                resultCallback?.Invoke(AdvertShownResult.Close);
-            #endif
+            if (CanShowAd())
+            {
+                AdStarted?.Invoke();
+                #if YAGAMES_ENABLED
+                    Sdk.ShowFullScreenAdv(result =>
+                    {
+                        if (result != AdvertShownResult.Open)
+                        {
+                            AdFinished?.Invoke();
+                        }
+                        callback?.Invoke();
+                    });
+                #else
+                    callback?.Invoke();
+                #endif
+            }
+            else
+            {
+                callback?.Invoke();
+            }
+        }
+
+        private static bool CanShowAd()
+        {
+            var now = Time.realtimeSinceStartup;
+
+            if (now - _adTime >= 60)
+            {
+                _adTime = now;
+                return true;
+            }
+
+            return false;
         }
     }
 }

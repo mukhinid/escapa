@@ -1,17 +1,14 @@
+using Escapa.Social;
 using Escapa.Utility;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static Escapa.Core.InputSystem_Actions;
-using SM = Escapa.Social.SocialManager;
 
 namespace Escapa.Core.Controllers
 {
     public sealed class SystemController : MonoBehaviour, ICoreActions
     {
-        [SerializeField]
-        private SocialController _social;
-
         private InputSystem_Actions _actions;
         private GameScenes current;
 
@@ -35,7 +32,7 @@ namespace Escapa.Core.Controllers
             _actions.Core.Enable();
         }
 
-        private void Start() => SM.Init(OnAuthenticated);
+        private void Start() => SocialManager.Init(OnAuthenticated);
 
         private void OnDisable()
         {
