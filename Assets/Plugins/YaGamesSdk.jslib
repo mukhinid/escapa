@@ -54,4 +54,18 @@ mergeInto(LibraryManager.library, {
     });
   },
 
+  Authorize: function(callback) {
+    window.ysdk.auth.openAuthDialog().then(() => {
+      window.ysdk.getPlayer().then(_player => {
+        window.player = _player;
+        {{{ makeDynCall('vi', 'callback') }}}(1);
+      }).catch(err => {
+        console.error(err);
+        {{{ makeDynCall('vi', 'callback') }}}(0);
+      });
+    }).catch(() => {
+      {{{ makeDynCall('vi', 'callback') }}}(0);
+    });
+  },
+
 });

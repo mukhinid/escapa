@@ -53,6 +53,15 @@ namespace Escapa.Social
             }
         }
 
+        public static void Authorize(Action<bool> callback)
+        {
+            #if YAGAMES_ENABLED
+                Sdk.Authorize(callback);
+            #else
+                callback?.Invoke(false);
+            #endif
+        }
+
         public static bool IsAuthorized
         {
             get

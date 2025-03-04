@@ -9,6 +9,7 @@ namespace Escapa.Social.YaGames
     {
         private static Action _onInit;
         private static Action<AdvertShownResult> _onAdvertShown;
+        private static Action<bool> _onAuthorized;
 
         public static Environment Environment
         {
@@ -31,6 +32,12 @@ namespace Escapa.Social.YaGames
             ShowFullScreenAdv(OnAdvertShownCallback);
         }
 
+        public static void Authorize(Action<bool> callback)
+        {
+            _onAuthorized = callback;
+            InternalAuthorize(OnAuthorizedCallback);
+        }
+
         [DllImport("__Internal", EntryPoint = "Init")]
         private static extern void InternalInit(Action callback);
 
@@ -45,6 +52,9 @@ namespace Escapa.Social.YaGames
 
         [DllImport("__Internal")]
         public static extern void SendScore(string lbName, long score);
+
+        [DllImport("__Internal", EntryPoint = "Authorize")]
+        private static extern void InternalAuthorize(Action<int> callback);
 
         [MonoPInvokeCallback(typeof(Action))]
         private static void OnInitCallback()
@@ -63,6 +73,16 @@ namespace Escapa.Social.YaGames
             {
                 _onAdvertShown.Invoke((AdvertShownResult)result);
                 _onAdvertShown = null;
+            }
+        }
+
+        [MonoPInvokeCallback(typeof(Action<int>))]
+        private static void OnAuthorizedCallback(int result)
+        {
+            if (_onAuthorized != null)
+            {
+                _onAuthorized.Invoke(result == 1);
+                _onAuthorized = null;
             }
         }
     }
