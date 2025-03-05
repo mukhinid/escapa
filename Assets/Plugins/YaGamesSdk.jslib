@@ -4,13 +4,19 @@ mergeInto(LibraryManager.library, {
     YaGames.init().then(_ysdk => {
       window.ysdk = _ysdk;
 
-      window.ysdk.features.LoadingAPI.ready();
+      _ysdk.features.LoadingAPI.ready();
 
-      window.ysdk.getPlayer().then(_player => {
+      const playerPromise = _ysdk.getPlayer({ scopes: false }).then(_player => {
         window.player = _player;
       }).catch(console.error);
 
-      {{{ makeDynCall('v', 'callback') }}}(0);
+      const lbPromise = _ysdk.getLeaderboards().then(_lb => {
+        window.leaderboards = _lb;
+      }).catch(console.error);
+
+      Promise.allSettled([playerPromise, lbPromise]).then(() => {
+        {{{ makeDynCall('v', 'callback') }}}(0);
+      });
     });
   },
 
@@ -48,15 +54,13 @@ mergeInto(LibraryManager.library, {
   },
 
   SendScore: function(lbName, score) {
-    window.ysdk.getLeaderboards().then(lb => {
-      const name = UTF8ToString(lbName);
-      lb.setLeaderboardScore(name, score);
-    });
+    const name = UTF8ToString(lbName);
+    window.lb.setLeaderboardScore(name, score);
   },
 
   Authorize: function(callback) {
     window.ysdk.auth.openAuthDialog().then(() => {
-      window.ysdk.getPlayer().then(_player => {
+      window.ysdk.getPlayer({ scopes: false }).then(_player => {
         window.player = _player;
         {{{ makeDynCall('vi', 'callback') }}}(1);
       }).catch(err => {
