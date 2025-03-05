@@ -32,7 +32,12 @@ namespace Escapa.Core.Controllers
             _actions.Core.Enable();
         }
 
-        private void Start() => SocialManager.Init(OnAuthenticated);
+        private void Start()
+        {
+            SocialManager.Init(
+                () => SceneManager.LoadScene((int)GameScenes.Menu, LoadSceneMode.Single)
+            );
+        }
 
         private void OnDisable()
         {
@@ -42,8 +47,6 @@ namespace Escapa.Core.Controllers
         }
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode) => current = (GameScenes)scene.buildIndex;
-
-        private void OnAuthenticated() => SceneManager.LoadScene((int)GameScenes.Menu, LoadSceneMode.Single);
 
         public void OnGoBack(InputAction.CallbackContext context)
         {

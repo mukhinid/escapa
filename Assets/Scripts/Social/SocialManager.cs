@@ -62,21 +62,18 @@ namespace Escapa.Social
             #endif
         }
 
-        public static bool IsAuthorized
+        public static bool IsAuthorized()
         {
-            get
-            {
-                #if YAGAMES_ENABLED
-                    return Sdk.IsAuthorized();
-                #else
-                    return false;
-                #endif
-            }
+            #if YAGAMES_ENABLED
+                return Sdk.IsAuthorized();
+            #else
+                return false;
+            #endif
         }
 
         public static void SendScore(long time, int difficulty)
         {
-            if (!IsAuthorized)
+            if (!IsAuthorized())
             {
                 return;
             }

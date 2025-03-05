@@ -16,11 +16,10 @@ namespace Escapa.Core.Controllers
 
         private void Start()
         {
-            // var auth = SM.IsAuthorized;
-            _loginButton.SetActive(true);
-            // _loginButton.SetActive(!auth);
-            // _achievementsButton.SetActive(auth);
-            // _lbButton.SetActive(auth);
+            var auth = SM.IsAuthorized();
+            _loginButton.SetActive(!auth);
+            _achievementsButton.SetActive(auth);
+            _lbButton.SetActive(auth);
         }
 
         public void GoToMenu() => LoadScene(GameScenes.Menu);
