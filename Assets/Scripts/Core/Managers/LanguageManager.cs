@@ -1,7 +1,7 @@
+using Escapa.Social;
 using Escapa.Utility;
 using System;
 using UnityEngine;
-using SM = Escapa.Social.SocialManager;
 
 namespace Escapa.Core.Managers
 {
@@ -14,7 +14,7 @@ namespace Escapa.Core.Managers
         {
             string lang;
             #if YAGAMES_ENABLED
-                lang = SM.GetLanguage();
+                lang = SocialManager.GetLanguage();
                 if (lang != "fr" &&  lang != "de" && lang != "ru" && lang != "es")
                 {
                     lang = "en";
