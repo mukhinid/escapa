@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static Escapa.Core.InputSystem_Actions;
+using SM = Escapa.Social.SocialManager;
 
 namespace Escapa.Game
 {
@@ -71,7 +72,10 @@ namespace Escapa.Game
         {
             player.Died -= OnPlayerDie;
             ScoreManager.StopCount();
-            SocialManager.SendScore();
+
+            var time = (long)(ScoreManager.LastTime * 1000);
+            var level = (int)DifficultyManager.Current.difficulty;
+            SM.SendScore(time, level);
 
             SceneManager.LoadScene((int)GameScenes.End);
         }

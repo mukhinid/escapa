@@ -1,18 +1,37 @@
 using Escapa.Utility;
 using System;
 using UnityEngine;
+using SM = Escapa.Social.SocialManager;
 
 namespace Escapa.Core.Managers
 {
     public static class LanguageManager
     {
-        private static string[] strings = Array.Empty<string>();
-        public static string GetString(LanguageTokens token) => strings[(int)token];
+        private static readonly Lazy<string[]> strings = new(Load());
+        public static string GetString(LanguageTokens token) => strings.Value[(int)token];
 
-        public static void Load(string lang)
+        private static string[] Load()
         {
+            string lang;
+            #if YAGAMES_ENABLED
+                lang = SM.GetLanguage();
+                if (lang != "fr" &&  lang != "de" && lang != "ru" && lang != "es")
+                {
+                    lang = "en";
+                }
+            #else
+                lang = Application.systemLanguage switch
+                {
+                    SystemLanguage.French => "fr",
+                    SystemLanguage.German => "de",
+                    SystemLanguage.Russian => "ru",
+                    SystemLanguage.Spanish => "es",
+                    _ => "en",
+                };
+            #endif
+
             var json = Resources.Load<TextAsset>($"{ResourceKeys.Languages}/{lang}").text;
-            strings = JsonUtility.FromJson<Language>(json).Strings;
+            return JsonUtility.FromJson<Language>(json).Strings;
         }
     }
 }

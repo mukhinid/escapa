@@ -1,3 +1,4 @@
+using Escapa.Social;
 using Escapa.Utility;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,9 +9,6 @@ namespace Escapa.Core.Controllers
 {
     public sealed class SystemController : MonoBehaviour, ICoreActions
     {
-        [SerializeField]
-        private SocialController _social;
-
         private InputSystem_Actions _actions;
         private GameScenes current;
 
@@ -34,7 +32,12 @@ namespace Escapa.Core.Controllers
             _actions.Core.Enable();
         }
 
-        private void Start() => _social.Init(OnAuthenticated);
+        private void Start()
+        {
+            SocialManager.Init(
+                () => SceneManager.LoadScene((int)GameScenes.Menu, LoadSceneMode.Single)
+            );
+        }
 
         private void OnDisable()
         {
@@ -44,8 +47,6 @@ namespace Escapa.Core.Controllers
         }
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode) => current = (GameScenes)scene.buildIndex;
-
-        private void OnAuthenticated() => SceneManager.LoadScene((int)GameScenes.Menu, LoadSceneMode.Single);
 
         public void OnGoBack(InputAction.CallbackContext context)
         {
