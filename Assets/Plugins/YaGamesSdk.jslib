@@ -55,7 +55,7 @@ mergeInto(LibraryManager.library, {
 
   SendScore: function(lbName, score) {
     const name = UTF8ToString(lbName);
-    window.lb.setLeaderboardScore(name, score);
+    window.leaderboards.setLeaderboardScore(name, score);
   },
 
   Authorize: function(callback) {
