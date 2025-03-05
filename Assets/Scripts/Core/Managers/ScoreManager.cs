@@ -1,6 +1,4 @@
-﻿using Escapa.Assets.Scripts.Utility;
-using Escapa.Utility;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Escapa.Core.Managers
 {
@@ -13,21 +11,6 @@ namespace Escapa.Core.Managers
         public static float LastTime { get; private set; }
 
         public static bool IsHighScore { get; private set; }
-
-        /// <summary>
-        /// The time after which we give the achievement "Black hawk"
-        /// </summary>
-        public static float BlackHawkTime => times.BlackHawk;
-
-        /// <summary>
-        /// The time after which we give the achievement "Zen"
-        /// </summary>
-        public static float ZenTime => times.Zen;
-
-        /// <summary>
-        /// The time after which we give the achievement "Moves Like Jagger"
-        /// </summary>
-        public static float JaggerTime => times.Jagger;
 
         public static void StartCount()
         {
@@ -62,12 +45,5 @@ namespace Escapa.Core.Managers
         }
 
         private static float startTime;
-        private static readonly TimeConfig times = LoadConfig();
-
-        private static TimeConfig LoadConfig()
-        {
-            var json = Resources.Load<TextAsset>($"{ResourceKeys.Achievements}").text;
-            return JsonUtility.FromJson<AchievementsConfig>(json).Time;
-        }
     }
 }

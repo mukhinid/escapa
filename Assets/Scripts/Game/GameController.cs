@@ -1,12 +1,12 @@
-using System;
 using Escapa.Core;
 using Escapa.Core.Managers;
+using Escapa.Social;
 using Escapa.Utility;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static Escapa.Core.InputSystem_Actions;
-using SM = Escapa.Social.SocialManager;
 
 namespace Escapa.Game
 {
@@ -37,23 +37,10 @@ namespace Escapa.Game
             _actions.Core.Enable();
         }
 
-        private void FixedUpdate()
-        {
-            if (ScoreManager.CurrentTime > ScoreManager.BlackHawkTime && DifficultyManager.Current.difficulty == Difficulties.Insane)
-                SocialManager.CompleteAchievement(GooglePlayIds.achievement_black_hawk);
-
-            if (idleTime.HasValue && ScoreManager.CurrentTime - idleTime.Value > ScoreManager.ZenTime)
-                SocialManager.CompleteAchievement(GooglePlayIds.achievement_zen);
-            else if (movingTime.HasValue && ScoreManager.CurrentTime - movingTime > ScoreManager.JaggerTime)
-                SocialManager.CompleteAchievement(GooglePlayIds.achievement_moves_like_jagger);
-        }
-
         private void OnApplicationPause(bool pauseStatus)
         {
             if (pauseStatus)
             {
-                SocialManager.CompleteAchievement(GooglePlayIds.achievement_panic_button);
-
                 OnPlayerDie();
             }
         }
@@ -75,7 +62,7 @@ namespace Escapa.Game
 
             var time = (long)(ScoreManager.LastTime * 1000);
             var level = (int)DifficultyManager.Current.difficulty;
-            SM.SendScore(time, level);
+            SocialManager.SendScore(time, level);
 
             SceneManager.LoadScene((int)GameScenes.End);
         }
