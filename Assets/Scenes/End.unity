@@ -265,7 +265,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81649e9bece0434fa4565af1e737b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSocialButton: 0
 --- !u!1 &595917821
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,7 +596,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81649e9bece0434fa4565af1e737b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSocialButton: 0
 --- !u!1 &1091884636
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,7 +807,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAlfa: 0
-  token: 12
 --- !u!1 &1963600639
 GameObject:
   m_ObjectHideFlags: 0

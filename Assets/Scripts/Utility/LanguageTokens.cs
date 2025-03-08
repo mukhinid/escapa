@@ -14,7 +14,7 @@
         SoundCredit,
         SoundCopyright,
         SoundLink,
-        None,
         LoginInvitation,
+        Login,
     }
 }

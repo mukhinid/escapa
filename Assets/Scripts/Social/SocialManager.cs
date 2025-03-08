@@ -8,8 +8,8 @@ namespace Escapa.Social
     {
         private static float _adTime = -100;
 
-        public static event Action AdStarted;
-        public static event Action AdFinished;
+        public static event Action PopupShowed;
+        public static event Action PopupClosed;
 
         public static void Init(Action callback)
         {
@@ -33,13 +33,13 @@ namespace Escapa.Social
         {
             if (CanShowAd())
             {
-                AdStarted?.Invoke();
+                PopupShowed?.Invoke();
                 #if YAGAMES_ENABLED
                     Sdk.ShowFullScreenAdv(result =>
                     {
                         if (result != AdvertShownResult.Open)
                         {
-                            AdFinished?.Invoke();
+                            PopupClosed?.Invoke();
                         }
                         callback?.Invoke();
                     });
@@ -56,7 +56,12 @@ namespace Escapa.Social
         public static void Authorize(Action<bool> callback)
         {
             #if YAGAMES_ENABLED
-                Sdk.Authorize(callback);
+                PopupShowed?.Invoke();
+                Sdk.Authorize((res) =>
+                {
+                    PopupClosed?.Invoke();
+                    callback?.Invoke(res);
+                });
             #else
                 callback?.Invoke(false);
             #endif

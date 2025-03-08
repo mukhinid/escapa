@@ -1769,7 +1769,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAlfa: 1
-  token: 12
 --- !u!1 &1933861125
 GameObject:
   m_ObjectHideFlags: 0

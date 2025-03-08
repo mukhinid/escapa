@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace Escapa.UI
 {
-    [RequireComponent(typeof(Label))]
+    [RequireComponent(typeof(StyledLabel))]
     public sealed class TimeCounterLabel : MonoBehaviour
     {
         private readonly char[] currentRecordBuffer = { '0', '0', '0', '0', ',', '0', '\0' };
-        private Label label;
+        private StyledLabel label;
 
-        private void Awake() => label = GetComponent<Label>();
+        private void Awake() => label = GetComponent<StyledLabel>();
 
         private void FixedUpdate()
         {

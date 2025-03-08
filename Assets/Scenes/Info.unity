@@ -222,6 +222,7 @@ GameObject:
   - component: {fileID: 530442831}
   - component: {fileID: 530442830}
   - component: {fileID: 530442832}
+  - component: {fileID: 530442833}
   m_Layer: 0
   m_Name: SoundCreditText
   m_TagString: Untagged
@@ -361,7 +362,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAlfa: 0
-  token: 9
+--- !u!114 &530442833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530442828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee480a507c84f5e4eb32fd6313d09f05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _token: 9
 --- !u!1 &813402172
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,6 +387,7 @@ GameObject:
   - component: {fileID: 813402175}
   - component: {fileID: 813402174}
   - component: {fileID: 813402176}
+  - component: {fileID: 813402177}
   m_Layer: 0
   m_Name: Logo
   m_TagString: Untagged
@@ -513,7 +527,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAlfa: 0
-  token: 7
+--- !u!114 &813402177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813402172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee480a507c84f5e4eb32fd6313d09f05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _token: 7
 --- !u!1 &1147400163
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,7 +696,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81649e9bece0434fa4565af1e737b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSocialButton: 0
 --- !u!114 &1719762381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -873,6 +898,7 @@ GameObject:
   - component: {fileID: 1883133092}
   - component: {fileID: 1883133091}
   - component: {fileID: 1883133093}
+  - component: {fileID: 1883133094}
   m_Layer: 0
   m_Name: SoundCopyrightText
   m_TagString: Untagged
@@ -1012,7 +1038,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAlfa: 0
-  token: 10
+--- !u!114 &1883133094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883133089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee480a507c84f5e4eb32fd6313d09f05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _token: 10
 --- !u!1 &1988644123
 GameObject:
   m_ObjectHideFlags: 0
