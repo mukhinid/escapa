@@ -318,6 +318,7 @@ GameObject:
   - component: {fileID: 947995134}
   - component: {fileID: 947995133}
   - component: {fileID: 947995135}
+  - component: {fileID: 947995136}
   m_Layer: 0
   m_Name: LogoText
   m_TagString: Untagged
@@ -457,7 +458,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAlfa: 0
-  token: 7
+--- !u!114 &947995136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947995131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee480a507c84f5e4eb32fd6313d09f05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _token: 7
 --- !u!1 &965791846
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,7 +623,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAlfa: 0
-  token: 0
 --- !u!114 &965791851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -858,7 +870,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81649e9bece0434fa4565af1e737b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSocialButton: 0
 --- !u!1 &1622941382
 GameObject:
   m_ObjectHideFlags: 0
@@ -1004,7 +1015,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81649e9bece0434fa4565af1e737b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSocialButton: 0
 --- !u!1 &1817220567
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,7 +1160,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81649e9bece0434fa4565af1e737b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSocialButton: 0
 --- !u!1 &1932380016
 GameObject:
   m_ObjectHideFlags: 0
@@ -1403,7 +1412,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81649e9bece0434fa4565af1e737b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSocialButton: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

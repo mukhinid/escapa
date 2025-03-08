@@ -4,19 +4,19 @@ using UnityEngine;
 
 namespace Escapa.UI
 {
-    [RequireComponent(typeof(Label))]
+    [RequireComponent(typeof(StyledLabel))]
     public sealed class TimeLabel : MonoBehaviour
     {
         [SerializeField]
         private bool showHighScore;
 
-        private Label label;
+        private StyledLabel label;
         private string newHighScoreTitle;
         private string highScoreTitle;
 
         private void Awake()
         {
-            label = GetComponent<Label>();
+            label = GetComponent<StyledLabel>();
             newHighScoreTitle = LanguageManager.GetString(LanguageTokens.NewHighScore);
             highScoreTitle = LanguageManager.GetString(LanguageTokens.HighScoreTitle);
     }
