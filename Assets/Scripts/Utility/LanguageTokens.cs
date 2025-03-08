@@ -15,5 +15,6 @@
         SoundCopyright,
         SoundLink,
         LoginInvitation,
+        Login,
     }
 }
