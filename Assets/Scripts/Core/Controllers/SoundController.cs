@@ -32,6 +32,18 @@ namespace Escapa.Core.Controllers
             SocialManager.AdFinished += OnAdFinished;
         }
 
+        private void OnApplicationFocus(bool focus)
+        {
+            if (focus)
+            {
+                _audioSource.Pause();
+            }
+            else
+            {
+                _audioSource.UnPause();
+            }
+        }
+
         private void OnDisable()
         {
             SocialManager.AdStarted -= OnAdStarted;
