@@ -11,6 +11,8 @@ namespace Escapa.Social
         public static event Action PopupShowed;
         public static event Action PopupClosed;
 
+        public static bool IsPopupOpen { get; private set; }
+
         public static void Init(Action callback)
         {
             #if YAGAMES_ENABLED
@@ -34,14 +36,16 @@ namespace Escapa.Social
             if (CanShowAd())
             {
                 PopupShowed?.Invoke();
+                IsPopupOpen = true;
                 #if YAGAMES_ENABLED
                     Sdk.ShowFullScreenAdv(result =>
                     {
                         if (result != AdvertShownResult.Open)
                         {
+                            IsPopupOpen = false;
                             PopupClosed?.Invoke();
+                            callback?.Invoke();
                         }
-                        callback?.Invoke();
                     });
                 #else
                     callback?.Invoke();
@@ -57,8 +61,10 @@ namespace Escapa.Social
         {
             #if YAGAMES_ENABLED
                 PopupShowed?.Invoke();
+                IsPopupOpen = true;
                 Sdk.Authorize((res) =>
                 {
+                    IsPopupOpen = false;
                     PopupClosed?.Invoke();
                     callback?.Invoke(res);
                 });

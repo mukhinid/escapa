@@ -36,11 +36,14 @@ namespace Escapa.Core.Controllers
         {
             if (focus)
             {
-                _audioSource.Pause();
+                if (!SocialManager.IsPopupOpen)
+                {
+                    _audioSource.UnPause();
+                }
             }
             else
             {
-                _audioSource.UnPause();
+                _audioSource.Pause();
             }
         }
 
@@ -52,7 +55,10 @@ namespace Escapa.Core.Controllers
             }
             else
             {
-                _audioSource.UnPause();
+                if (!SocialManager.IsPopupOpen)
+                {
+                    _audioSource.UnPause();
+                }
             }
         }
 
