@@ -1,4 +1,4 @@
-using Escapa.Social;
+using Escapa.Core.Managers;
 using Escapa.Utility;
 
 namespace Escapa.Core.Controllers

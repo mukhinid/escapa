@@ -323,7 +323,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Connectez
+  m_text: Log in
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f9c5cab9929d7e640ab49c5e6065c0c5, type: 2}
   m_sharedMaterial: {fileID: 21169485055634228, guid: f9c5cab9929d7e640ab49c5e6065c0c5,

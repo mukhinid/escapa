@@ -1,4 +1,4 @@
-using Escapa.Social;
+using Escapa.Core.Managers;
 using Escapa.Utility;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -34,9 +34,10 @@ namespace Escapa.Core.Controllers
 
         private void Start()
         {
-            SocialManager.Init(
-                () => SceneManager.LoadScene((int)GameScenes.Menu, LoadSceneMode.Single)
-            );
+            StartCoroutine(SocialManager.Init(() =>
+            {
+                SocialManager.ShowAd(() => SceneManager.LoadScene((int)GameScenes.Menu, LoadSceneMode.Single));
+            }));
         }
 
         private void OnDisable()
