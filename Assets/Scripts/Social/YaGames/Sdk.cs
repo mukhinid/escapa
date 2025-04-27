@@ -57,33 +57,12 @@ namespace Escapa.Social.YaGames
         private static extern void InternalAuthorize(Action<int> callback);
 
         [MonoPInvokeCallback(typeof(Action))]
-        private static void OnInitCallback()
-        {
-            if (_onInit != null)
-            {
-                _onInit.Invoke();
-                _onInit = null;
-            }
-        }
+        private static void OnInitCallback() => _onInit?.Invoke();
 
         [MonoPInvokeCallback(typeof(Action<int>))]
-        private static void OnAdvertShownCallback(int result)
-        {
-            if (_onAdvertShown != null)
-            {
-                _onAdvertShown.Invoke((AdvertShownResult)result);
-                _onAdvertShown = null;
-            }
-        }
+        private static void OnAdvertShownCallback(int result) => _onAdvertShown?.Invoke((AdvertShownResult)result);
 
         [MonoPInvokeCallback(typeof(Action<int>))]
-        private static void OnAuthorizedCallback(int result)
-        {
-            if (_onAuthorized != null)
-            {
-                _onAuthorized.Invoke(result == 1);
-                _onAuthorized = null;
-            }
-        }
+        private static void OnAuthorizedCallback(int result) => _onAuthorized?.Invoke(result == 1);
     }
 }

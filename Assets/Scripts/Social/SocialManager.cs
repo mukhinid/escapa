@@ -35,16 +35,24 @@ namespace Escapa.Social
         {
             if (CanShowAd())
             {
-                PopupShowed?.Invoke();
-                IsPopupOpen = true;
                 #if YAGAMES_ENABLED
                     Sdk.ShowFullScreenAdv(result =>
                     {
-                        if (result != AdvertShownResult.Open)
+                        switch (result)
                         {
-                            IsPopupOpen = false;
-                            PopupClosed?.Invoke();
-                            callback?.Invoke();
+                            case AdvertShownResult.Open:
+                            {
+                                PopupShowed?.Invoke();
+                                IsPopupOpen = true;
+                                return;
+                            }
+                            default:
+                                {
+                                IsPopupOpen = false;
+                                PopupClosed?.Invoke();
+                                callback?.Invoke();
+                                return;
+                            }
                         }
                     });
                 #else
