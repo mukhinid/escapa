@@ -34,9 +34,10 @@ namespace Escapa.Core.Controllers
 
         private void Start()
         {
-            SocialManager.Init(
-                () => SceneManager.LoadScene((int)GameScenes.Menu, LoadSceneMode.Single)
-            );
+            SocialManager.Init(() =>
+            {
+                SocialManager.ShowAd(() => SceneManager.LoadScene((int)GameScenes.Menu, LoadSceneMode.Single));
+            });
         }
 
         private void OnDisable()
