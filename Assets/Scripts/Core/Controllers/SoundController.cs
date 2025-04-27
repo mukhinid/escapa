@@ -1,4 +1,5 @@
-﻿using Escapa.Social;
+using Escapa.Core.Managers;
+using System;
 using UnityEngine;
 
 namespace Escapa.Core.Controllers
@@ -28,7 +29,7 @@ namespace Escapa.Core.Controllers
 
         private void OnEnable()
         {
-            SocialManager.PopupShowed += OnAdStarted;
+            SocialManager.PopupShown += OnAdStarted;
             SocialManager.PopupClosed += OnAdFinished;
         }
 
@@ -64,12 +65,12 @@ namespace Escapa.Core.Controllers
 
         private void OnDisable()
         {
-            SocialManager.PopupShowed -= OnAdStarted;
+            SocialManager.PopupShown -= OnAdStarted;
             SocialManager.PopupClosed -= OnAdFinished;
         }
 
-        private void OnAdStarted() => _audioSource.Pause();
+        private void OnAdStarted(object sender, EventArgs e) => _audioSource.Pause();
 
-        private void OnAdFinished() => _audioSource.UnPause();
+        private void OnAdFinished(object sender, EventArgs e) => _audioSource.UnPause();
     }
 }

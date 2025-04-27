@@ -1,8 +1,7 @@
-﻿using Escapa.Utility;
-using UnityEngine;
-using Escapa.Social;
-using TMPro;
 using Escapa.Core.Managers;
+using Escapa.Utility;
+using TMPro;
+using UnityEngine;
 
 namespace Escapa.Core.Controllers
 {
@@ -15,7 +14,7 @@ namespace Escapa.Core.Controllers
 
         private void Start()
         {
-            var auth = SocialManager.IsAuthorized();
+            var auth = SocialManager.IsAuthorized;
             if (auth)
             {
                 _invite.SetActive(false);

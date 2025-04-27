@@ -1,6 +1,5 @@
 using Escapa.Core;
 using Escapa.Core.Managers;
-using Escapa.Social;
 using Escapa.Utility;
 using System;
 using UnityEngine;
@@ -60,7 +59,7 @@ namespace Escapa.Game
             player.Died -= OnPlayerDie;
             ScoreManager.StopCount();
 
-            var time = (long)(ScoreManager.LastTime * 1000);
+            var time = (int)(ScoreManager.LastTime * 1000);
             var level = (int)DifficultyManager.Current.difficulty;
             SocialManager.SendScore(time, level);
 
