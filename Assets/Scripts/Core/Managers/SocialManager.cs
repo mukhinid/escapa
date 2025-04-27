@@ -22,7 +22,11 @@ namespace Escapa.Core.Managers
 
         public static IEnumerator Init(Action callback)
         {
-            return YandexGamesSdk.Initialize(callback);
+            return YandexGamesSdk.Initialize(() =>
+            {
+                YandexGamesSdk.GameReady();
+                callback?.Invoke();
+            });
         }
 
         public static string GetLanguage()
