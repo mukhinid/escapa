@@ -60,8 +60,7 @@ namespace Escapa.Game
             ScoreManager.StopCount();
 
             var time = (int)(ScoreManager.LastTime * 1000);
-            var level = (int)DifficultyManager.Current.difficulty;
-            SocialManager.SendScore(time, level);
+            SocialManager.SendScore(time);
 
             SceneManager.LoadScene((int)GameScenes.End);
         }

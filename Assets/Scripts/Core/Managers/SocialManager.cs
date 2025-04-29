@@ -1,6 +1,9 @@
 using Agava.YandexGames;
+using Escapa.Utility;
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Escapa.Core.Managers
 {
@@ -38,20 +41,38 @@ namespace Escapa.Core.Managers
 #endif
         }
 
-        public static void SendScore(int time, int difficulty)
+        public static void GetLeaderboard(Action<string, IList<(string, string, int)>> callback)
+        {
+            var id = GetLeaderboardId();
+            Leaderboard.GetEntries(id, (res) =>
+            {
+                var entries = new List<(string, string, int)>(5);
+                for (var i = 0; i < res.entries.Length; i++)
+                {
+                    entries.Add(new(res.entries[i].player.profilePicture, res.entries[i].player.publicName, res.entries[i].score));
+                }
+
+                var title = GetLanguage() == "ru"
+                    ? $"ТОП 5 - {res.leaderboard.title.ru}"
+                    : $"TOP 5 - {res.leaderboard.title.en}";
+                callback?.Invoke(title, entries);
+            }, competingPlayersCount: 0, includeSelf: false);
+        }
+
+        public static void DownloadImage(string url, Action<Sprite> callback)
+        {
+            var image = new RemoteImage(url);
+            image.Download((texture) => callback?.Invoke(Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero)));
+        }
+
+        public static void SendScore(int time)
         {
             if (!IsAuthorized)
             {
                 return;
             }
 
-            var id = difficulty switch
-            {
-                1 => "medium1",
-                2 => "hard1",
-                3 => "insane1",
-                _ => "easy1",
-            };
+            var id = GetLeaderboardId();
             Leaderboard.SetScore(id, time);
         }
 
@@ -83,5 +104,13 @@ namespace Escapa.Core.Managers
                 }
             );
         }
+
+        private static string GetLeaderboardId() => DifficultyManager.Current.difficulty switch
+        {
+            Difficulties.Medium => "medium1",
+            Difficulties.Hard => "hard1",
+            Difficulties.Insane => "insane1",
+            _ => "easy1",
+        };
     }
 }
