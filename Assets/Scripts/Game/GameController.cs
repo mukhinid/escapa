@@ -18,15 +18,10 @@ namespace Escapa.Game
 
         private InputSystem_Actions _actions;
 
-        private float? idleTime;
-        private float? movingTime;
-
         private void OnEnable()
         {
             player.Died += OnPlayerDie;
-            player.Moved += OnPlayerMoved;
             player.Pressed += OnPlayerPressed;
-            player.Stopped += OnPlayerStopped;
 
             if (_actions == null)
             {
@@ -36,20 +31,10 @@ namespace Escapa.Game
             _actions.Core.Enable();
         }
 
-        private void OnApplicationPause(bool pauseStatus)
-        {
-            if (pauseStatus)
-            {
-                OnPlayerDie();
-            }
-        }
-
         private void OnDisable()
         {
             player.Died -= OnPlayerDie;
-            player.Moved -= OnPlayerMoved;
             player.Pressed -= OnPlayerPressed;
-            player.Stopped -= OnPlayerStopped;
 
             _actions.Core.Disable();
         }
@@ -65,30 +50,12 @@ namespace Escapa.Game
             SceneManager.LoadScene((int)GameScenes.End);
         }
 
-        private void OnPlayerMoved()
-        {
-            if (!movingTime.HasValue)
-            {
-                movingTime = ScoreManager.CurrentTime;
-                idleTime = null;
-            }
-        }
-
         private void OnPlayerPressed()
         {
             player.Pressed -= OnPlayerPressed;
 
             ScoreManager.StartCount();
             GameStarted?.Invoke();
-        }
-
-        private void OnPlayerStopped()
-        {
-            if (!idleTime.HasValue)
-            {
-                idleTime = ScoreManager.CurrentTime;
-                movingTime = null;
-            }
         }
 
         public void OnGoBack(InputAction.CallbackContext context)

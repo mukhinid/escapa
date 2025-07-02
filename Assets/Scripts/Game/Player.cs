@@ -11,9 +11,7 @@ namespace Escapa.Game
     public sealed class Player : MonoBehaviour, IPlayerActions
     {
         public event Action Died;
-        public event Action Moved;
         public event Action Pressed;
-        public event Action Stopped;
 
         [SerializeField]
         private MainCamera _camera;
@@ -41,10 +39,6 @@ namespace Escapa.Game
             if (isTouched)
                 transform.position = targetPosition;
 
-            if (Vector2.Distance(targetPosition, oldPosition) > float.Epsilon)
-                Moved?.Invoke();
-            else
-                Stopped?.Invoke();
             oldPosition = targetPosition;
         }
 
